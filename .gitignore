@@ -3,7 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 appsettings.Development.json
-appsettings.development.json
+appsetting.development.json
 appsettings.json
 info.txt
 # User-specific files
