@@ -9,14 +9,15 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/Testimonials.css" />
     <link rel="stylesheet" href="~/css/aboutus.css" />
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
-    <header class="mb-5">
-        <nav class="navbar fixed-top navbar-expand-lg navbar-toggleable-sm navbar-light mb-5" style="background-color: white;">
-            <div class="container-fluid mb-3 mt-3">
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-toggleable-sm navbar-light" style="background-color: white; ">
+            <div class="container-fluid">
                 <a class="navbar-brand mr-lg-5" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="/img/layout/LOGO.png" style="width:150px" />
                 </a>
@@ -88,7 +89,6 @@
                         </div>
                         <div class="col nav-item ml-lg-5 mt-lg-2 ml-lg-5 ">
                             <p class="text-dark font-weight-bold">info@musikimalling.dk</p>
-
                         </div>
                     </div>
 
@@ -107,14 +107,14 @@
             </div>
         </nav>
     </header>
-
-    <div class="container-fluid" style="margin-top: 60px;">
+    <div class="container-fluid" style="margin-top: 65px;">
         <main role="main" class="pt-3">
 
             @RenderBody()
         </main>
     </div>
-    <div class="card">
+
+    <div class="card mt-5">
         <div class="card-body text-center font-weight-bolder" style="font-size: 34px;">
             <footer class="blockquote-footer">
                 <cite title="Source Title">Musik I Malling</cite>
@@ -125,8 +125,9 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/ckeditor/ckeditor.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
