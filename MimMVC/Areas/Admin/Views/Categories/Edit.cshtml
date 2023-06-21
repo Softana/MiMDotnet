@@ -1,0 +1,41 @@
+﻿@model Category
+
+@{
+	ViewData["Title"] = "Edit";
+}
+
+
+
+<div class="row mt-3 rounded shadow p-3 rounde mt-3" style="background-color: #fafafa;">
+	<h4 class="ml-3">Redigere kategorien</h4>
+
+	<div class="col-md-6">
+		<form asp-action="Edit">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+			<input type="hidden" asp-for="Sorting" />
+
+			<div class="form-group">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tilbage til listen" asp-action="Index"><i class="fas fa-backspace"></i>&nbsp;Tilbage</a>
+				<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Gem dine ændringer"><i class="fas fa-check"></i>&nbsp;Gem</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+@if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.TeacherRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole) || User.IsInRole(MimMVC.WC.BankRole))
+{
+	
+}
+
+
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{ 
+	var user = await UserManager.GetUserAsync(User);
+}
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        
+        <a class="nav-link text-dark" data-toggle="tooltip" data-placement="top" title="Gå til min profil side" asp-area="identity" asp-page="/Account/Manage/businesscard" asp-route-id="@user.Id">
+            Hej @if (user.FirstName.Any())
+            {@user.FirstName}&nbsp;<i class="fas fa-user"></i>
+        </a>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-secondary btn-sm text-light" data-toggle="tooltip" data-placement="top" title="Tryk for at log ud"><i class="fas fa-sign-out-alt"></i>&nbsp;Log ud</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-success" data-toggle="tooltip" data-placement="top" title="Tryk for at tilmelde en ny bruger eller elev" asp-area="Identity" asp-page="/Account/Register">Indmeld</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="top" title="Tryk for at log in med din bruger" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

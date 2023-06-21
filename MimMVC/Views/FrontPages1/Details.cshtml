@@ -1,0 +1,90 @@
+﻿@model MimMVC.Models.FrontPage
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>FrontPage</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PostTitle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PostTitle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PostContent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PostContent)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BannerContent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BannerContent)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BannerButtonLink)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BannerButtonLink)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BannerButtonName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BannerButtonName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstBanner)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FirstBanner)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StikyTitle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StikyTitle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StikyContent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StikyContent)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StikyContent2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StikyContent2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StikyTitle2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StikyTitle2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ImageName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

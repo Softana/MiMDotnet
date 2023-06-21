@@ -1,0 +1,245 @@
+﻿@page
+@using Microsoft.AspNetCore.Components.Forms
+@using System.Reflection.Metadata
+@using MimMVC.Models
+@model RegisterModel
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container rounded shadow pt-3 rounde " style="background-color: #fafafa;">
+
+    @if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole) || User.IsInRole(MimMVC.WC.BankRole) || User.IsInRole(MimMVC.WC.Manager))
+    {
+        <h5 class="text-success" style="margin: 3rem 0 1rem 0;">Opret en ny Elev</h5>
+    }
+    else
+    {
+        <h5 class="text-success" style="margin: 1rem 0 1rem 0;">Tilmelding</h5>
+    }
+
+    <div style="margin: 0 0 3rem 0;">
+        Her kan du tilmelde dig musikundervisning i Musik i Malling. Når du tilmelder dig opretter du samtidig en brugerprofil,
+        som du kan bruge til at tilmelde dig de forskellige events, som vi afholder i Musik i Malling<br />
+        Husk at der skal indbetales årligt kontingent til foreningen på kr.100,00 når det er bekræftet at du har fået plads hos en underviser.<br /><br />
+        <a class="text-success" href="/home/practical_index">Se øvrige priser og praktisk information her.</a> <br />
+        <span style="font-weight: bold">Kontingent indbetales på reg. nr. 5479 / konto nr. 0005969848</span>  - husk at skrive elevens navn på indbetalingen.alingen.
+    </div>
+    <hr class="hr-register" />
+
+    <div class="container justify-content-center">
+        <h5 class="text-success ">Oplysninger</h5>
+
+        <form class="pb-3 " asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label>Er eleven over 18?</label><br />
+                <input type="radio" value="Ja" name="Adult" onclick="overAge()" checked="checked" />Ja<br />
+                <input type="radio" value="Nej" onclick="underAge()" name="Adult" />Nej<br />
+            </div>
+            <div class="row">
+                <div id="parentsFirstName" class="col form-group" style="display: none">
+                    <label></label>
+                    <input asp-for="Input.ParentsFirstName" class="form-control" placeholder="Forældres fornavn udfyldes, hvis eleven er under 18 år" />
+                    <span asp-validation-for="Input.ParentsFirstName" class="text-danger"></span>
+                </div>
+                <div id="parentsLastName" class="col form-group" style="display: none">
+                    <label></label>
+                    <input asp-for="Input.ParentsLastName" class="form-control" placeholder="Forældres efternavn udfyldes, hvis eleven er under 18 år" />
+                    <span asp-validation-for="Input.ParentsLastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class=" col form-group">
+                    <label>Vælg et unique Brugernavn</label>
+                    <input asp-for="Input.UserName" class="form-control" placeholder="Et unique brugernavn" />
+                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                </div>
+                <div class=" col form-group">
+                    <label></label>
+                    <input asp-for="Input.Email" class="form-control" placeholder="E-mailadresse" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="col form-group">
+                    <label></label>
+                    <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Telefonnummer" />
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <label></label>
+                    <input asp-for="Input.FirstName" class="form-control" placeholder="Elevens fornavn" />
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
+
+                <div class=" col form-group">
+                    <label></label>
+                    <input asp-for="Input.LastName" class="form-control" placeholder="Elevens Efternavn" />
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+                <div class=" col form-group">
+                    <label></label>
+                    <input asp-for="Input.Age" class="form-control" placeholder="Elevens Alder" />
+                    <span asp-validation-for="Input.Age" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <label></label>
+                    <input asp-for="Input.Adress" class="form-control" placeholder="Adresse" />
+                    <span asp-validation-for="Input.Adress" class="text-danger"></span>
+                </div>
+
+                <div class="col form-group">
+                    <label></label>
+                    <input asp-for="Input.PostalCode" class="form-control" placeholder="Postnummer" />
+                    <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                @if (ViewData["Produkter"] as List<Product> is not null)
+                {
+                    <div class=" col form-group">
+                        <label>Hvad vil du gå til?</label>
+                        <select asp-for="Input.Instruction" asp-items="ViewBag.CategoryId" class="form-control">
+                            <option value="0">- Vælg -</option>
+                            @foreach (var product in ViewData["Produkter"] as List<Product>)
+                            {
+                                <option value="@product.Title">@product.Title</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Input.Instruction" class="text-danger"></span>
+                    </div>
+                }
+                <div class="col form-group ml-3">
+                    <label>Hvor længe har du spillet?</label>
+                    <select asp-for="Input.NoYPlayed" class="form-control">
+                        <option value="Har ikke spillet før">Har ikke spillet før</option>
+                        <option value="1 år">1 år</option>
+                        <option value="2 år">2 år</option>
+                        <option value="3 år">3 år</option>
+                        <option value="4 år">4 år</option>
+                        <option value="5+ år">5 år eller længere</option>
+                    </select>
+                </div>
+
+                @if (ViewData["Lærer"] as List<ApplicationUser> is not null)
+                {
+                    <div class="col form-group">
+                        <label class="control-label">Jeg vil undervises af en bestemt musiklærer</label>
+                        <select asp-for="Input.TaughtBy" asp-items="ViewBag.CategoryId" class="form-control">
+                            <option value="@null">- Vælg underviser-</option>
+                            @foreach (var teacher in Model.Teachers)
+                            {
+                                <option value="@teacher.Id">@teacher.FullName</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Input.TaughtBy" class="text-danger"></span>
+                    </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label>Ønsker du ene-undervisning?</label><br />
+                <input type="radio" value="Ja" name="eneundervisning" onclick="hidediv()" checked="checked" />Ja<br />
+                <input type="radio" value="Nej" onclick="showdiv()" name="eneundervisning" />Nej<br />
+            </div>
+            <div id="OnInteractWith" class="form-group" style="display: none">
+                <label>Skriv det fulde navn og telefonnummer på den, du ønsker at gå med, hvis du har en aftale med en ven. 
+                       Hvis du ikke har en aftale på plads, så vil vi forsøge at finde en til dig.</label>
+                <input asp-for="Input.InteractWith" class="form-control" />
+                <span asp-validation-for="Input.InteractWith" class="text-danger"></span>
+            </div>
+            <br />
+
+            <hr class="hr-register" />
+            <h5 class="text-success">Må vi bruge billeder af dig fra vores events til:</h5>
+            <div class="row">
+                <div class="col form-group">
+                    <label>Vores Hjemmeside?</label><br />
+                    <input type="radio" asp-for="Input.PermitsWebside" value="@true" checked="checked" />Ja<br />
+                    <input type="radio" asp-for="Input.PermitsWebside" value="@false"  />Nej<br />
+                </div>
+
+                <div class="col form-group">
+                    <label> De Sociale Medier?</label><br />
+                    <input type="radio" asp-for="Input.PermitsSocial" value="@true" checked="checked" />Ja<br />
+                    <input type="radio" asp-for="Input.PermitsSocial" value="@false"  />Nej<br />
+                </div>
+
+                <div class="col form-group">
+                    <label>Promoverering Af Musikskolen?</label><br />
+                    <input type="radio" asp-for="Input.PermitsAdvertising" value="@true" checked="checked"/>Ja<br />
+                    <input type="radio" asp-for="Input.PermitsAdvertising" value="@false"  />Nej<br />
+                </div>
+            </div>
+            <hr class="hr-register" />
+            <div class="row">
+                <div class="col form-group">
+                    <label>Vælg et kodeord</label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="col form-group">
+                    <label>Gentag kodeordet</label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label"></label>
+                <br />
+                <input asp-for="Input.ImageFile" accept="image/*" />
+                <span asp-validation-for="Input.ImageFile" class="text-danger"></span>
+            </div>
+            <h5 class="text-success">Yderligere kommentarer</h5>
+
+            <div class="form-group">
+                <textarea class="form-control" asp-for="Input.Comments" id="comment" placeholder="Skriv her, hvis der er yderligere kommentar...." rows="3" runat="server"> </textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane"></i> &nbsp;Send</button>
+
+        </form>
+    </div>
+
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript">
+        function hidediv() {
+            document.getElementById('OnInteractWith').style.display = 'none';
+        }
+
+        function showdiv() {
+            document.getElementById('OnInteractWith').style.display = 'block';
+        }
+    </script>
+
+    <script type="text/javascript">
+        function overAge() {
+			document.getElementById('parentsFirstName').style.display = 'none';
+			document.getElementById('parentsLastName').style.display = 'none';
+        }
+
+        function underAge() {
+			document.getElementById('parentsFirstName').style.display = 'block';
+			document.getElementById('parentsLastName').style.display = 'block';
+        }
+    </script>
+}

@@ -1,0 +1,33 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Godkend registrering";
+}
+<div class="container">
+    <br />
+    <h3 class="text-success">@ViewData["Title"]</h3>
+    @{
+        if (@Model.DisplayConfirmAccountLink)
+        {
+	    <div class="container">
+		    <p>
+			    Denne app er ikke opsat til at sende beskeder, når man opretter en bruger
+		    </p>
+	    </div>
+
+        }
+        else
+        {
+    <div class="container">
+        <p>
+            Venligst tjekke din e-mail for at godkende dit login! <br />
+        </p>
+        <p class="ml-3">
+            Hvis du ikke har modtaget en mail fra os inde for et kort stykke tid, prøv at se i spam. <br />
+            Ellers bedes du kontakte en af vores medarbejder som du kan finde i menuen <a href="/home/aboutus_index">Om os</a>
+	    </p>
+    </div>
+
+        }
+    }
+</div>

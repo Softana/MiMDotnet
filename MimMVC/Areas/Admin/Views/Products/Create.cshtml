@@ -1,0 +1,84 @@
+﻿@model MimMVC.Models.Product
+
+@{
+	ViewData["Title"] = "Create";
+}
+
+
+
+<div class="row mt-3" style="background-color: #fafafa;">
+	<div class="col-md-10 rounded shadow p-3 bg-white rounde mt-3">
+		<a class="btn btn-secondary m-2" data-toggle="tooltip" data-placement="top" title="Tilbage til listen" asp-action="Index"><i class="fas fa-backspace"></i>&nbsp;Tilbage</a>
+
+		<h5>Tilføj et nyt produkt</h5>
+		<form asp-action="Create" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+			<div class="form-group">
+				<label asp-for="Title" class="control-label">Titel</label>
+				<input asp-for="Title" class="form-control" />
+				<span asp-validation-for="Title" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Description" class="control-label">Beskrivelse</label>
+				<textarea asp-for="Description" class="form-control"></textarea>
+				<span asp-validation-for="Description" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="SingleLekPrice" class="control-label"> Pris for enkelt lektioner</label>
+				<input asp-for="SingleLekPrice" class="form-control" />
+				<span asp-validation-for="SingleLekPrice" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="DoubleLekPrice" class="control-label">Pris for en dobbeltlektioner</label>
+				<input asp-for="DoubleLekPrice" class="form-control" />
+				<span asp-validation-for="DoubleLekPrice" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="GroupLekPrice" class="control-label">Pris for gruppelektioner</label>
+				<input asp-for="GroupLekPrice" class="form-control" />
+				<span asp-validation-for="GroupLekPrice" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="LekTimeSpan" class="control-label"> Lektion varighed</label>
+				<input asp-for="LekTimeSpan" class="form-control" />
+				<span asp-validation-for="LekTimeSpan" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="CategoryId" class="control-label"></label>
+				<select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-control">
+					<option value="0">Vælg en kategorie - -</option>
+				</select>
+				<span asp-validation-for="CategoryId" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="ImageUpload" class="control-label"></label>
+				<input asp-for="ImageUpload" data-toggle="tooltip" data-placement="top" title="Vælg et billede til dette produkt" />
+				<img src="" id="imgpreview" alt="" />
+				<span asp-validation-for="ImageUpload" class="text-danger"></span>
+			</div>
+
+			<div>
+				<a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title=" tilbage til listen" asp-action="Index"><i class="fas fa-backspace"></i>&nbsp;Tilbage</a>
+				<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title=" Gem produktet"><i class="fas fa-check"></i>&nbsp;Opret</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+	<script>
+		CKEDITOR.replace("Description");
+
+		$("#ImageUpload").change(function () {
+			readURL(this);
+		});
+	</script>
+
+}

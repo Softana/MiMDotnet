@@ -1,0 +1,35 @@
+﻿@model Category
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="row rounded shadow p-3 rounde mt-3" style="background-color: #fafafa;">
+	<h5 class="text-secondary ml-3">Opret en ny kategori</h5>
+
+	<div class="col-md-10">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title=" Gå tilbage til listen" asp-action="Index"><i class="fas fa-backspace"></i>&nbsp;Tilbage</a>
+				<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title=" Gem kategoriet"><i class="fas fa-check"></i>&nbsp;Gem</button>
+
+			</div>
+		</form>
+	</div>
+</div>
+
+<div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,38 @@
+﻿@using MimMVC.Models
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+	var user = await UserManager.GetUserAsync(User);
+}
+
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+	var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<br />
+<div class="container" >
+	<nav class="navbar navbar-expand navbar-light justify-content-center">
+        <ul class="navbar-nav  justify-content-center">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    &nbsp;<i class="fas fa-users-cog"></i> Ændre profiloplysninger
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" data-toggle="tooltip" data-placement="top" title="Her kan du redigere i dine personlige oplysninger" id="index" asp-area="identity" asp-controller="account" asp-action="manage">Personlige Oplysninger</a>
+                    <a class="dropdown-item" data-toggle="tooltip" data-placement="top" title="Redigere din mail-adresse" id="email" asp-area="identity" asp-controller="account" asp-action="manage/email">Email</a>
+                    <a class="dropdown-item" data-toggle="tooltip" data-placement="top" title="Skift dit kodeord her" id="changePassword" asp-area="identity" asp-controller="account" asp-action="manage/ChangePassword">Kode</a>
+                </div>
+            </li>
+
+            <li class="nav-item"><a style="color: black; " class="nav-link activ @ManageNavPages.IndexNavClass(ViewContext)" data-toggle="tooltip" data-placement="top" title="Her kan du finde de væssentligste opslysninger om dig" id="change-password" asp-page="./BusinessCard">Profil</a></li>
+            @if (User.IsInRole(MimMVC.WC.TeacherRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole))
+            {
+                <li class="nav-item"><a class="nav-link active" data-toggle="tooltip" data-placement="top" title="Her finder du en liste over alle dine elever,samt de elever, der endnu ikke har fået tildelt en lærer" id="Students" asp-area="identity" asp-controller="account" asp-action="manage/Students"> Elever</a></li>
+            }
+                            
+        </ul>
+	</nav>
+</div>
+

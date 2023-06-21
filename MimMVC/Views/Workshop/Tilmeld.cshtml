@@ -1,0 +1,40 @@
+﻿@model MimMVC.Models.TilmeldDto
+
+@{
+	ViewData["Title"] = "Tilmeld";
+}
+<div class=" w-50 offset-3 justify-content-center rounded shadow p-3 bg-white rounde">
+
+
+	<div class="row justify-center">
+
+		<div class="col-md-6">
+			<h4 class="text-success">Tilføj antal gæster</h4>
+			<hr />
+			<form asp-action="Tilmeld">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<div class="form-group">
+					<label asp-for="guests" class="control-label">Hvor mange gæster ønsker du at have med?</label>
+					<input asp-for="guests" class="form-control" />
+					<span asp-validation-for="guests" class="text-danger"></span>
+				</div>
+
+				<div class="form-group" hidden>
+					<label asp-for="WorkshopId"></label>
+					<input asp-for="@Model.WorkshopId" value="@Model.WorkshopId" class="form-control" />
+				</div>
+
+				<div class="form-group">
+					<input type="submit" value="Gem" class="btn btn-warning" />
+					<i class="fas fa-check"></i>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div>
+		<a class="text-success" asp-action="Index">Tilbage</a>
+	</div>
+</div>
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

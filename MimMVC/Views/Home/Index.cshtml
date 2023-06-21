@@ -1,0 +1,107 @@
+﻿@model IEnumerable<MimMVC.Models.FrontPage>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade " data-ride="carousel" data-interval="10000">
+        
+        @*<partial name="_UserInfoLayoutPartial" model="@ApplicationUser"/>*@
+
+        <div class="carousel-inner ">
+            @foreach (var banner in Model)
+            {
+                @if (banner.FirstBanner)
+                {
+                    <div class="carousel-item active">
+                        <div class="img-wrapper">
+                            <img class="img-responsive" src="@("~/img/layout/banner/" + banner.ImageName)" asp-append-version="true" />
+                            @if (banner.BannerContent != null)
+                            {
+                                <div class="textbox-overlay mt-sm-5">
+                                    <div class="img-box-text">@Html.Raw(banner.BannerContent)</div>
+
+                                    @if (banner.BannerButtonLink != null)
+                                    {
+                                        <div class="text-center">
+                                            <a href="@(banner.BannerButtonLink)" class="btn btn-success btn-lg table-hover" role="button" aria-disabled="true" target="_blank">@(banner.BannerButtonName)</a>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                if (banner.PostTitle == null)
+                {
+                    <div class="carousel-item">
+                        <div class="img-wrapper">
+                            <img class="img-responsive" src="@("~/img/layout/banner/" + banner.ImageName)" asp-append-version="true" />
+                            @if (banner.BannerContent != null)
+                            {
+                        <div class="textbox-overlay">
+                            <div class="img-box-text">@Html.Raw(banner.BannerContent)</div>
+
+                            @if (banner.BannerButtonLink != null)
+                            {
+                                <div class="text-center">
+                                    <a href="google.com" class="btn btn-info btn-lg table-hover" role="button" aria-disabled="true" target="_blank">@(banner.BannerButtonName)</a>
+                                </div>
+                            }
+                        </div>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<br />
+<div class="container" >
+    
+    @foreach (var post in Model.Reverse())
+    {
+        @if (post.PostTitle != null && post.ImageName != null)
+        {
+            <div class="row featurette rounded shadow p-3 rounde mb-2" style="background-color: #fafafa;">
+                <div class="col-md-7 ">
+                    <h2 class="featurette-heading">@Html.Raw(post.PostTitle)</h2>
+                    @Html.Raw(post.PostContent)
+                    @if (post.Date != DateTime.MinValue)
+                    {
+                        <p class="lead text-muted">@Html.DisplayFor(modelItem => post.Date)</p>
+                    }
+                </div>
+                <div class="col-md-5 text-center">
+                    <img src="@("~/img/post/" + post.ImageName)" asp-append-version="true" style="height:13rem;" />
+                </div>
+            </div>
+        }
+        else if (post.PostTitle != null && post.ImageName == null)
+        {
+
+            <div class="row featurette rounded shadow p-3 rounde mb-2" style="background-color: #fafafa;">
+                <div class="col-md-12">
+                    <h2 class="featurette-heading">@Html.Raw(post.PostTitle)</h2>
+                    <p class="lead">@Html.DisplayFor(modelItem => post.PostContent)</p>
+
+                </div>
+
+            </div>
+        }
+    }
+
+</div>

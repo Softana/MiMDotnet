@@ -1,0 +1,73 @@
+﻿@model IEnumerable<MimMVC.Models.FrontPage>
+
+@{
+    ViewData["Title"] = "Post Index";
+}
+
+    
+<div class="container rounded shadow p-3 bg-white rounde mt-3">
+    <br />
+    <h4>Indhold på siden </h4>
+
+    <p>
+        <a class="btn btn-success" asp-action="PostNewContent_Create"><i class="fas fa-plus-square"></i>&nbsp;Opret ny</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostContent)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImageName)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Reverse())
+            {
+                if (item.PostTitle != null)
+                {
+                <tr class="rounded shadow p-3 bg-white rounde m-2">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostTitle)
+                    </td>
+                    <td>
+                        @Html.Raw(item.PostContent)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @if (item.ImageName == null)
+                        {
+                            <img src="~/img/layout/noimage.png" width="100px" height="100px" />
+                        }
+                        @if (item.ImageName != null)
+                        {
+                            @*@Html.DisplayFor(modelItem => item.ImageName)*@
+                            <img src="@("~/img/post/" + item.ImageName)" asp-append-version="true" width="100px" height="100px" />
+                        }
+
+
+                    </td>
+                    <td>
+                        <a class="btn btn-secondary " asp-action="PostNewContent_Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i>&nbsp;</a>
+                        <a class="btn btn-danger mt-1 confirmDeletion " asp-action="PostNewContent_Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt">.</i>&nbsp;</a>
+
+                    </td>
+                </tr>
+                }
+                
+            }
+        </tbody>
+    </table>
+</div>

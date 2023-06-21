@@ -1,0 +1,125 @@
+﻿@page
+@using MimMVC.Models
+@using MimMVC
+@model IndexModel
+@inject UserManager<ApplicationUser> UserManager
+@{
+	ViewData["Title"] = "Profile";
+	ViewData["ActivePage"] = ManageNavPages.Students;
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<br />
+<div class="row">
+
+
+	@if (User.IsInRole(WC.AdminTeacherRole) || User.IsInRole(WC.TeacherRole))
+	{
+		<div class="col-md-6">
+			
+			<table class="table-striped table-bordered  container-fluid ">
+				<thead>
+					<tr>
+						<th class="align-content-center"><h6 class="text-center" style="color:cadetblue">Mine elever</h6></th>
+					</tr>
+					<tr>
+						<th> navn</th>
+						<th> Alder</th>
+						<th>Inst</th>
+						<th>Tlf</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var student in Model.AssignedStudents)
+					{
+					<tr>
+						<td class="text-success">@Html.DisplayFor(modelItem => student.FullName)</td>
+						<td>@Html.DisplayFor(modelItem => student.Age)</td>
+						<td>@Html.DisplayFor(modelItem => student.Instruction)</td>
+						<td>@Html.DisplayFor(modelItem => student.PhoneNumber)</td>
+						<td>
+							<a type="submit" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Frigør denne elev fra din liste" asp-controller="Manage"
+								asp-action="DeleteStudentFromTeacher" asp-route-id="@student.Id">
+								<i class="fas fa-user-times"></i>&nbsp;Flyt ud&nbsp;<i class="fas fa-arrow-right"></i>
+							</a>
+						</td>
+					</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-6">
+			
+			<table class="table-striped table-bordered table-hover container-fluid ">
+				<thead>
+					<tr>
+						<th class="align-content-center"><h6 class="text-center" style="color:darkorange">Elever uden lærer</h6></th>
+					</tr>
+					<tr>
+						<th>
+							Navn
+						</th>
+						<th>
+							Alder
+						</th>
+						<th>
+							Inst
+						</th>
+						<th>
+							Tlf
+						</th>
+					</tr>
+					
+				</thead>
+				<tbody class="justify-content-center">
+					@foreach (var student in Model.StudentsWithNoTeacher)
+					{
+					<tr>
+						<td class="text-danger">
+							@Html.DisplayFor(modelItem => student.FullName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => student.Age)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => student.Instruction)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => student.PhoneNumber)
+						</td>
+
+						<td>
+							<a type="submit" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Gør krav på denne elev" asp-controller="Manage"
+							   asp-action="AddStudentToTeacher" asp-route-id="@student.Id">
+								<i class="fas fa-arrow-left"></i>&nbsp;<i class="fas fa-user-tag"></i>&nbsp;Snup
+							</a>
+						</td>
+
+					</tr>
+					}
+				</tbody>
+			</table>
+
+
+		</div>
+	}
+</div>
+
+
+
+@section Scripts {
+
+	
+	<script>
+		//$(function () {
+		//	$('[data-toggle="tooltip"]').tooltip()
+		//});
+
+		CKEDITOR.replace("Description");
+
+		$("#ImageUpload").change(function () {
+			readURL(this);
+		});
+	</script>
+
+}

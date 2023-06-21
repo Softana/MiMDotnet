@@ -1,0 +1,85 @@
+﻿@model IEnumerable<MimMVC.Models.FrontPage>
+
+@{
+    ViewData["Title"] = "CreateBanner";
+}
+<div class="container shadow p-3 rounde" style="background-color: #fafafa;">
+
+	
+	<p>
+		<a class="btn btn-success" asp-action="Banner_Create"><i class="fas fa-plus-square"></i>&nbsp;Opret ny</a>
+	</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.BannerContent)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.BannerButtonLink)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.FirstBanner)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				if (item.PostTitle == null)
+				{
+					<tr>
+						<td>
+							@Html.Raw(item.BannerContent)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.BannerButtonLink)
+						</td>
+						@if (item.FirstBanner)
+						{
+							<td>
+								@Html.RadioButtonFor(modelItem => item.FirstBanner, true, new
+								{
+							   @onclick = $"SetFirstBanner({item.Id})"
+						   })
+							</td>
+						}
+						else
+						{
+							<td>
+								@Html.RadioButtonFor(modelItem => item.FirstBanner, "", new { @onclick = $"SetFirstBanner({item.Id})" })
+							</td>
+						}
+
+						<td>
+							@*@Html.DisplayFor(modelItem => item.ImageName)*@
+							<img src="@("~/img/layout/banner/" + item.ImageName)" asp-append-version="true" style="width:300px; height:100px;" />
+						</td>
+
+						<td>
+							<a type="button" class="btn btn-secondary m-sm-1" asp-action="Banner_Edit" asp-route-id="@item.Id" m-1>
+								<i class="fas fa-edit"></i>
+							</a>
+
+							<a type="button" class="btn btn-danger m-1 mr-3" asp-action="Banner_Delete" asp-route-id="@item.Id" m-1>
+								<i class="fas fa-trash-alt"></i>
+							</a>
+						</td>
+					</tr>
+				}
+
+			}
+		</tbody>
+	</table>
+</div>
+
+<script>
+    function SetFirstBanner(id) {
+        $.ajax({
+            url: '@Url.Action("setFirst_Banner_Index", "frontpages")',
+            data: { id: id }
+
+        }).done()
+    }
+</script>

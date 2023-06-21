@@ -1,0 +1,27 @@
+﻿@using MimMVC.Migrations
+
+
+@model IEnumerable<MimMVC.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<div class="container rounded shadow p-3 bg-white rounde mt-3">
+	<h4 class="text-secondary text-center">Vi tilbyder musikundervisning i følgende:</h4>
+
+	@foreach (var item in Model)
+	{
+		<div class="container rounded shadow p-3 bg-white rounde mb-2 h-100">
+			<h4 class="text-success"> @Html.DisplayFor(modelItem => item.Title)</h4>
+			@Html.Raw(item.Description)
+			<br />
+		</div>
+	}
+	<hr />
+	<h6 class="text-secondary text-center">
+		Har du ønsker til undervisning i andre instrumenter, så er du velkommen til at kontakte os på mail og vi vil se, hvad vi kan gøre.
+	</h6>
+
+</div>

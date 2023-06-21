@@ -1,0 +1,150 @@
+﻿@model MimMVC.Models.Invoice
+
+@{
+    var title = "Opret et bilag";
+}
+<div class="container rounded shadow p-3 rounde mt-3" style="background-color: #fafafa;">
+	<form method="post" enctype="multipart/form-data">
+		
+					<div class="form-group row">
+						<h2 class="text-info pl-3">@title</h2>
+					</div>
+					<div class="row">
+						<div class="col-10">
+
+							<div class="form-group row">
+								<div class="col-4">
+									<label asp-for="Title"></label>
+								</div>
+								<div class="col-8">
+									<input asp-for="Title" class="form-control" />
+									<span asp-validation-for="Title" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-4">
+									<label asp-for="UserName"></label>
+								</div>
+								<div class="col-8">
+									<input asp-for="UserName" class="form-control" />
+									<span asp-validation-for="UserName" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-4">
+									<label asp-for="Description"></label>
+								</div>
+								<div class="col-8">
+									<textarea asp-for="Description" class="form-control"></textarea>
+									<span asp-validation-for="Description" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-4">
+									<label asp-for="DateCreate"></label>
+								</div>
+								<div class="col-8">
+									<input readonly asp-for="DateCreate" class="form-control" value="@DateTime.Now.ToString("yyy-MM-dd")">
+									<span asp-validation-for="DateCreate" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-4">
+									<label asp-for="StartTime"></label>
+								</div>
+								<div class="col-8">
+									<input asp-for="StartTime" class="form-control" value="@DateTime.Now.ToString("yyy-MM-dd")">
+									<span asp-validation-for="StartTime" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-4">
+									<label asp-for="FinishTime"></label>
+								</div>
+								<div class="col-8">
+									<input asp-for="FinishTime" class="form-control" value="289.47">
+									<span asp-validation-for="FinishTime" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-4">
+									<label asp-for="HourlyRate"></label>
+								</div>
+								<div class="col-8">
+									<input readonly asp-for="HourlyRate" class="form-control" value="289,47">
+									<span asp-validation-for="HourlyRate" class="text-danger"></span>
+								</div>
+							</div>
+
+
+							<div class="form-group row">
+								<div class="col-4">
+									<label asp-for="Expenses"></label>
+								</div>
+								<div class="col-8">
+									<input asp-for="Expenses" class="form-control" value="0" />
+									<span asp-validation-for="Expenses" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-4">
+									<label asp-for="RegistrationNumber"></label>
+								</div>
+								<div class="col-8">
+									<input asp-for="RegistrationNumber" class="form-control" />
+									<span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-4">
+									<label asp-for="AccountNumber"></label>
+								</div>
+								<div class="col-8">
+									<input asp-for="AccountNumber" class="form-control" />
+									<span asp-validation-for="AccountNumber" class="text-danger"></span>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label asp-for="Image" class="control-label"></label>
+								<input asp-for="ImageUpload" class="form-control" />
+								<img src="" id="imgpreviewInvoice" alt="" />
+								<span asp-validation-for="ImageUpload" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<input type="submit" value="Gem" class="btn btn-warning" />
+							</div>
+							<div>
+								<a class="btn btn-info" asp-action="Index">Tilbage</a>
+							</div>
+						</div>
+					</div>
+	</form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        //CKEDITOR.replace("Description");
+        $("#ImageUpload").change(function () {
+            readURL(this);
+        });
+    </script>
+    <script src="~/js/DateTimePicker.js"></script>
+
+
+}

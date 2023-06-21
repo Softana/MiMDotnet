@@ -1,0 +1,134 @@
+﻿@page
+@using MimMVC.Models
+@using MimMVC 
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+
+<div class="container">
+
+    <h4 class="align-content-center">Dine oplysinger</h4>
+    <br />
+    
+    <form id="profile-form" method="post" enctype="multipart/form-data">
+        @*<div asp-validation-summary="ModelOnly"></div>*@
+
+        <div class="form-group">
+            <img src="@("~/img/profileImages/" + Model.Input.ImageName)" asp-append-version="true" style="max-width:10rem" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.ImageFile" class="control-label">Nyt billede</label>
+            <input asp-for="Input.ImageFile" />
+            <img src="" id="imgpreview" alt="" />
+            <span asp-validation-for="Input.ImageFile" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" disabled />
+        </div>
+
+
+
+        <div class="form-group">
+            <label asp-for="Input.PhoneNumber"></label>
+            <input asp-for="Input.PhoneNumber" class="form-control" />
+            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.FirstName"></label>
+            <input asp-for="Input.FirstName" class="form-control" />
+            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.LastName"></label>
+            <input asp-for="Input.LastName" class="form-control" />
+            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+        </div>
+       
+        <div class="form-group">
+            <label asp-for="Input.Age"></label>
+            <input asp-for="Input.Age" class="form-control" />
+            <span asp-validation-for="Input.Age" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Adress"></label>
+            <input asp-for="Input.Adress" class="form-control" />
+            <span asp-validation-for="Input.Adress" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.PostalCode"></label>
+            <input asp-for="Input.PostalCode" class="form-control" />
+            <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.ParentsFirstName"></label>
+            <input asp-for="Input.ParentsFirstName" class="form-control" />
+            <span asp-validation-for="Input.ParentsFirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.ParentsLastName"></label>
+            <input asp-for="Input.ParentsLastName" class="form-control" />
+            <span asp-validation-for="Input.ParentsLastName" class="text-danger"></span>
+        </div>
+
+        @if (User.IsInRole(WC.TeacherRole) || User.IsInRole(WC.AdminTeacherRole))
+        {
+            <h2>Lærer beskrivelse</h2>
+            <hr>
+            <div class="form-group">
+                <label asp-for="Input.TeacherShotDescription"></label>
+                <input asp-for="Input.TeacherShotDescription" class="form-control" />
+                <span asp-validation-for="Input.TeacherShotDescription" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.TeacherDescription"></label>
+                <input asp-for="Input.TeacherDescription" class="form-control" />
+                <span asp-validation-for="Input.TeacherDescription" class="text-danger"></span>
+            </div>
+
+            @if (ViewData["Produkter"] as List<Product> is not null)
+            {
+                <div class="form-group">
+                    <label asp-for="Input.Teach"></label>
+                    <select asp-for="Input.Teach" asp-items="ViewBag.CategoryId" class="form-control">
+                        <option value="0">- Vælg -</option>
+                        @foreach (var product in ViewData["Produkter"] as List<Product>)
+                        {
+                            <option value="@product.Title">@product.Title</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Input.Teach" class="text-danger"></span>
+                </div>
+            }
+        }
+        <button id="update-profile-button" type="submit" class="btn btn-primary">Gem</button>
+    </form>
+
+</div>
+
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        CKEDITOR.replace("Description");
+
+        $("#ImageUpload").change(function () {
+            readURL(this);
+        });
+
+        $('#element').tooltip('show')
+    </script>
+
+
+
+}

@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<!-- Main Layout -->
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MimMVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Testimonials.css" />
+    <link rel="stylesheet" href="~/css/aboutus.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="mb-5">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-toggleable-sm navbar-light mb-5" style="background-color: white;">
+            <div class="container-fluid mb-3 mt-3">
+                <a class="navbar-brand mr-lg-5" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/img/layout/LOGO.png" style="width:150px" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav me-auto mr-lg-5 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link " style="font-weight: bold; color: #5a5a5a;" asp-area="" asp-controller="Home" asp-action="AboutUs_Index">Om os</a>
+                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " style="font-weight: bold; color: #5a5a5a;" asp-area="" asp-controller="Workshop" asp-action="Index">Invitationer</a>
+                            </li>
+                        }
+
+                        <li class="nav-item">
+                            <a class="nav-link " style="font-weight: bold; color: #5a5a5a;" asp-area="" asp-controller="Home" asp-action="Practical_Index">Praktisk</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " style="font-weight: bold; color: #5a5a5a;" asp-area="" asp-controller="Videos" asp-action="Index">Videoer</a>
+                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.TeacherRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole) || User.IsInRole(MimMVC.WC.BankRole) || User.IsInRole(MimMVC.WC.Manager))
+                            {
+                                <li class="nav-item ">
+                                    <a class="nav-link " style="font-weight: bold; color: #5a5a5a;" asp-area="" asp-controller="FrontPages" asp-action="PostNewContent_Index">Opslag</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link " style="font-weight: bold; color: #5a5a5a;" asp-area="Admin" asp-controller="Invoices" asp-action="Index">Afregning</a>
+                                </li>
+                            }
+
+                            @if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.TeacherRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole) || User.IsInRole(MimMVC.WC.BankRole) || User.IsInRole(MimMVC.WC.Manager))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        &nbsp;<i class="fas fa-bars"></i>
+                                    </a>
+
+                                    <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                        @if (User.IsInRole(MimMVC.WC.AdminRole))
+                                        {
+                                            <a class="dropdown-item " style="font-weight: bold; color: #5a5a5a;" asp-area="Admin" asp-controller="Categories" asp-action="Index">Category</a>
+                                            <a class="dropdown-item " style="font-weight: bold; color: #5a5a5a;" asp-area="Admin" asp-controller="Products" asp-action="Index">Undervisning</a>
+                                            <a class="dropdown-item " style="font-weight: bold; color: #5a5a5a;" asp-area="Admin" asp-controller="Roles" asp-action="Index">Roller</a>
+                                        }
+                                        @if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.TeacherRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole) || User.IsInRole(MimMVC.WC.BankRole) || User.IsInRole(MimMVC.WC.Manager))
+                                        {
+                                            <a class="dropdown-item " style="font-weight: bold; color: #5a5a5a;" asp-area="Admin" asp-controller="Users" asp-action="Index">Brugere</a>
+                                            <a class="dropdown-item " style="font-weight: bold; color: #5a5a5a;" asp-area="" asp-controller="FrontPages" asp-action="Banner_Index">Banner</a>
+                                        }
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <div class="row justify-content-lg-end ">
+                        <div class="col navbar-nav social-icons pl-3 ">
+                            <a class="nav-link ml-lg-5 ml-sm-5 " href="https://www.facebook.com/musikimalling/" title="Facebook" target="_blank"><i class="fab fa-facebook fa-lg" style="color:#3b5998;"></i></a>
+                            <a class="nav-link" href="https://www.youtube.com/channel/UCg-FMDbT1yyLZLuyN3fWe2g" title="Youtube" target="_blank"><i class="fab fa-youtube fa-lg" style="color: #ff0000"></i></a>
+                        </div>
+                        <div class="col nav-item ml-lg-5 mt-lg-2 ml-lg-5 ">
+                            <p class="text-dark font-weight-bold">info@musikimalling.dk</p>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav my-0 my-lg-0">
+                        <li class="nav-item ">
+                            <partial name="_LoginPartial" />
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid" style="margin-top: 60px;">
+        <main role="main" class="pt-3">
+
+            @RenderBody()
+        </main>
+    </div>
+    <div class="card">
+        <div class="card-body text-center font-weight-bolder" style="font-size: 34px;">
+            <footer class="blockquote-footer">
+                <cite title="Source Title">Musik I Malling</cite>
+                &copy; 2021 - Kontakt os på e-mail: info@musikimalling.dk
+            </footer>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Page>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h4>Alle sider</h4>
+
+<p>
+	<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Tryk for at oprette en ny side" asp-action="Create"><i class="fas fa-plus-square"></i>&nbsp;Opret ny</a>
+</p>
+<table class="table sorting" id="pages">
+	<thead>
+		<tr class="home">
+			<th>
+				@Html.DisplayNameFor(model => model.Title)
+			</th>
+			
+			<th>
+				Indhold
+			</th>
+
+
+			
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr id="id_@item.Id" class="@item.Slug">
+				<td>
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+				
+				<td>
+					@Html.DisplayFor(modelItem => item.Content)
+				</td>
+				
+				<td>
+					<a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tryk for at redigere" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i>&nbsp;Redigere</a>
+					<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Tryk for a se detaljer" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i>&nbsp;Detaljer</a>
+					@if (item.Slug != "home")
+					{
+						<a class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Tryk for at slette" asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i>&nbsp;Slet</a>
+					}
+
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+@section Scripts {
+	<script>
+        $("table#pages tbody").sortable({
+            items: "tr:not(.Home)",
+            placeholder: "ui-state-highlight",
+            update: function () {
+                let ids = $("table#pages tbody").sortable("serialize");
+                let url = "/admin/pages/reorder";
+
+                $.post(url, ids, function () { });
+            }
+        })
+	</script>
+}

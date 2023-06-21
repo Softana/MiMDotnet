@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Product>
+
+@{
+	ViewData["Title"] = "Produkter";
+}
+<div class="container rounded shadow p-3 rounde mt-3" style="background-color: #fafafa;">
+	<h4>Alle produkter</h4>
+	<p>
+		<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Opret et nyt produkt / undervisning her" asp-action="Create"><i class="fas fa-plus-square"></i>&nbsp;Opret ny</a>
+	</p>
+	<table class="table">
+		<thead>
+			<tr>
+
+				<th>
+					@Html.DisplayNameFor(model => model.Title)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.SingleLekPrice)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.DoubleLekPrice)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.GroupLekPrice)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.LekTimeSpan)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Category)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Image)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.Title)
+					</td>
+
+					<td>
+						@Html.DisplayFor(modelItem => item.SingleLekPrice)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.DoubleLekPrice)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.GroupLekPrice)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.LekTimeSpan)
+					</td>
+
+					<td>
+						@Html.DisplayFor(modelItem => item.Category.Name)
+					</td>
+					<td>
+						<img src="~/img/products/@item.Image" width="100" alt="" />
+					</td>
+
+					@if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.TeacherRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole) || User.IsInRole(MimMVC.WC.BankRole))
+					{
+						<td>
+							<a class="btn btn-info " data-toggle="tooltip" data-placement="top" title="Se detaljer" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i>&nbsp;</a>
+							<a class="btn btn-secondary " data-toggle="tooltip" data-placement="top" title="Redigere" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i>&nbsp;</a>
+							<a class="btn btn-danger confirmDeletion" data-toggle="tooltip" data-placement="top" title="Slet dette produkt" asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
+						</td>
+					}
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
+
+
+

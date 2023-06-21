@@ -1,0 +1,63 @@
+﻿@model MimMVC.Models.FrontPage
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container shadow p-3 rounde" style="background-color: #fafafa;">
+
+	
+	<h4>Redigere Banner</h4>
+	<div class="row">
+		<div class="col-md-12">
+			<form asp-action="Banner_Edit" enctype="multipart/form-data">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<input type="hidden" asp-for="Id" />
+				<div class="form-group">
+					<label asp-for="BannerContent" class="control-label"></label>
+					<textarea asp-for="BannerContent" class="form-control"></textarea>
+					<span asp-validation-for="BannerContent" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="BannerButtonLink" class="control-label"></label>
+					<input asp-for="BannerButtonLink" class="form-control" />
+					<span asp-validation-for="BannerButtonLink" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="BannerButtonName" class="control-label"></label>
+					<input asp-for="BannerButtonName" class="form-control" />
+					<span asp-validation-for="BannerButtonName" class="text-danger"></span>
+				</div>
+
+				<div class="form-group">
+					<img src="@("~/img/layout/banner/" + Model.ImageName)" asp-append-version="true" width="100%" alt="@("~/img/layout/banner/" + Model.ImageName)" />
+
+				</div>
+
+
+				<div class="form-group">
+					<label asp-for="ImageName" class="control-label"></label>
+					<input asp-for="ImageFile" class="form-control" />
+					<img src="" id="imgpreviewInvoice" alt="" />
+					<span asp-validation-for="ImageFile" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Gem" class="btn btn-success" />
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div>
+		<a asp-action="Banner_Index">Tilbage</a>
+	</div>
+</div>
+
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        CKEDITOR.replace("BannerContent");
+    </script>
+}

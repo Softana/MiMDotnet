@@ -1,0 +1,27 @@
+﻿@page
+@using MimMVC.Models
+@model ApplicationUser
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Students;
+}
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+<br />
+
+
+<div class="container">
+
+    <div>
+        @Html.Partial("ApplicationUserView", user)
+    </div>
+
+</div>
+
+

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Category>
+
+@{
+	ViewData["Title"] = "Kategorier";
+}
+<div class="container rounded shadow p-3 rounde mt-3" style="background-color: #fafafa;">
+	<h5 class="text-secondary">Alle Kategorier</h5>
+
+	<p>
+		<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Opret et nyt kategorie" asp-action="Create"><i class="fas fa-plus-square"></i>&nbsp;Opret ny</a>
+	</p>
+	<table class="table sorting" id="categories">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.Name)
+				</th>
+
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr id="id_@item.Id">
+					<td>
+						@Html.DisplayFor(modelItem => item.Name)
+					</td>
+					@if (User.IsInRole(MimMVC.WC.AdminRole))
+					{
+						<td>
+							<a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title=" Ændre navnet på dette kategorie" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i>&nbsp;Redigere</a>
+							<a class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Slet dette kategorie" asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i>&nbsp;Slet</a>
+						</td>
+					}
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+@section Scripts {
+	<script>
+        $("table#categories tbody").sortable({
+            items: "tr:not(.Home)",
+            placeholder: "ui-state-highlight",
+            update: function () {
+				let ids = $("table#categories tbody").sortable("serialize");
+				let url = "/admin/categories/reorder";
+
+                $.post(url, ids, function () { });
+            }
+        })
+	</script>
+}

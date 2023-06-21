@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@{
+	ViewData["Title"] = "Roles";
+}
+<div class="container rounded shadow p-3 bg-white rounde mt-3">
+	<h4>Alle roller</h4>
+
+	<p>
+		<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Opret en ny rolle-type her" asp-action="Create"><i class="fas fa-plus-square"></i>&nbsp;Opret ny</a>
+	</p>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Role</th>
+				<th>Brugere</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var role in Model)
+			{
+				<tr>
+					<td>@role.Name</td>
+					<td user-role="@role.Id"></td>
+					<td>
+						@*<a class="btn btn-secondary " data-toggle="tooltip" data-placement="top" title="Her kan du ændre navnet på rollen" asp-action="Edit" asp-route-id="@role.Id"><i class="fas fa-edit"></i>&nbsp;Redigere</a>
+							<a class="btn btn-danger " data-toggle="tooltip" data-placement="top" title="Slet denne rolle" asp-action="Delete" asp-route-id="@role.Id"><i class="fas fa-trash-alt"></i>&nbsp;Slet</a>*@
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

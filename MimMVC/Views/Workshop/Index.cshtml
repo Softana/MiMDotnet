@@ -1,0 +1,95 @@
+﻿@model IEnumerable<MimMVC.Models.WorkShop>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container" style="margin-bottom:10px;">
+	@if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole) || User.IsInRole(MimMVC.WC.Manager))
+	{
+		<a class="btn-sm btn-warning"  asp-action="Create"><i class="fas fa-plus"></i>&nbsp;Opret en ny Invitation</a>
+	}
+</div>
+<div class="container border shadow rounde pb-1 mb-5">
+
+	@foreach (var item in Model)
+	{
+		<div class="container mb-3  mt-2 pb-3 " style="font-family: 'Segoe Print'; font-weight: bold; background: url('img/layout/invitationer_Baggrund.png') ">
+			<div class="row justify-content-center bg-transparent pt-1">
+				<h1 class="font-weight-bolder">Du inviteres til:&nbsp;@Html.DisplayFor(modelItem => item.Name)</h1>
+			</div>
+			<div class="row bg-transparent">
+				<div class="col justify-content-center bg-transparent m-3">
+					<h4 class="text-center bg-transparent font-weight-bolder">Tidspunkt fra: @Html.DisplayFor(modelItem => item.FinishTime) til @Html.DisplayFor(modelItem => item.StartTime) </h4>
+				</div>
+			</div>
+
+			<div class="col bg-transparent p-3">
+				@if (item.TilmeldteBrugere.Where(x => x.user.Id == UserManager.GetUserId(User)).Count() == 0)
+				{
+					<a class="btn-sm btn-info" asp-action="Tilmeld" asp-route-id="@item.Id"><i class="fas fa-user-check"></i>Deltager</a>
+				}
+				else
+				{
+					<a class="btn-sm btn-secondary" asp-action="Afmeld" asp-route-id="@item.Id"><i class="fas fa-user-check"></i>&nbsp;Deltager ikke</a>
+				}
+				@if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole) || User.IsInRole(MimMVC.WC.Manager))
+				{
+					<a class="btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-trash-alt">&nbsp;Rediger</i></a>
+				}
+
+				@if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole) || User.IsInRole(MimMVC.WC.Manager))
+				{
+					<a class="btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt">&nbsp;Slet</i></a>
+				}
+
+			</div>
+			<div class="col mb-3" style="height: 20em; background: url('img/invitation/@item.FileName')">
+
+			</div>
+
+		</div>
+		<div class="container">
+
+			<div class="container">
+
+				<div class="row p2">
+					<p style="font-size: 17px; font-family: 'Segoe Print';" class="bg-white font-weight-bolder justify-content-start border border-secondary">@Html.Raw(item.Description) </p>
+				</div>
+				<hr />
+				@if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.TeacherRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole) ||
+			   User.IsInRole(MimMVC.WC.BankRole) || User.IsInRole(MimMVC.WC.Manager) || User.IsInRole(MimMVC.WC.Chairman))
+				{
+					<div class="row mb-3" style="font-size: 20px; font-family: 'Segoe Print';">
+
+						<div class="col">
+							<h4 class="text-center font-weight-bold">Antal brugere:&nbsp;@Html.DisplayFor(modelItem => item.TilmeldteBrugere.Count) </h4>
+						</div>
+
+
+						<div class="col">
+							<h4 class="text-center font-weight-bold">Gæster&nbsp;@Html.DisplayFor(modelItem => item.AntalGæster) </h4>
+						</div>
+
+						<div class="col">
+							<h4 class="text-center font-weight-bold">Total tilmeldte&nbsp;@Html.DisplayFor(modelItem => item.TotalTilmeldt) </h4>
+						</div>
+						<div class="container">
+							@foreach (var variabel in item.TilmeldteBrugere)
+							{
+								<p>@variabel.user.FullName </p>
+
+							}
+						</div>
+
+					</div>
+				}
+
+			</div>
+		</div>
+		<hr />
+	}
+
+
+</div>

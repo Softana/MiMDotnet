@@ -1,0 +1,161 @@
+﻿@model IEnumerable<MimMVC.Models.Video>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<div class="container mt-3 rounded shadow p-3 bg-white rounde mt-0">
+	<div class="col">
+        <div class="row">
+            @if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.TeacherRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole) || User.IsInRole(MimMVC.WC.BankRole))
+            {             
+
+                <div class="card m-2" style="width: 18rem;">
+                    @*Admin*@
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/5d4HUHNWh-g" allowfullscreen></iframe>
+                    <div class="p-4">
+                        <h5 class="card-title">Administrator</h5>
+                        Denne video er lavet til
+                        <div class="collapse" id="collapseVideo_1">
+                            <p>
+                                administratoren af hjemmesiden.
+                            </p>
+                        </div>
+						<br />
+                        <button class="btn btn-success mt-2" data-toggle="collapse" href="#collapseVideo_1" role="button" aria-expanded="false" aria-controls="collapseVideo_1">Læs mere</button>
+                    </div>
+                </div>
+
+                <div class="card m-2" style="width: 18rem; ">
+                    @*Tilmelding*@
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/nuTcPgEfJ6w" allowfullscreen></iframe>
+                    <div class="p-4">
+                        <h5 class="card-title">Tilmelding og afregninger</h5>
+                        00:00 til 05:18, opret brugere
+                        <div class="collapse" id="collapseVideo_2">
+                            <p>
+                                05:18 til 07:16, Administrere dine elevliste<br />
+                                07:16 til 09:34, opret en lærerprofil<br />
+                                09:34 til slut, opret en regning til kassereren
+                            </p>
+                        </div>
+                        <br />
+                        <button class="btn btn-success mt-2" data-toggle="collapse" href="#collapseVideo_2" role="button" aria-expanded="false" aria-controls="collapseVideo_2">Læs mere</button>
+                    </div>
+                </div>
+
+
+                <div class="card m-1" style="width: 18rem; ">
+                    @*Layout*@
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/6L_zwlvGokk" allowfullscreen></iframe>
+                    <div class="p-4">
+                        <h5 class="card-title">Layout Tutorial</h5>
+                            Banner størrelse: 1900 x 500.
+                            <div class="collapse" id="collapseVideo_3">
+                                <p>
+                                    Opslagsbilledestørrelse: Firkantet - dvs lige store på alle sider. evt. 450px x 450px,<br />
+                                    eller hvor bredden er bredere end højden. <br />
+
+                                    00:00 til 03:50, Billede størrelser og photoshop <br />
+                                    03:50 til 06:20, Banner / Slider <br />
+                                    06:20 til slut, Opslag <br />
+                                </p>
+                            </div>
+                            <br />
+                            <button class="btn btn-success mt-2" data-toggle="collapse" href="#collapseVideo_3" role="button" aria-expanded="false" aria-controls="collapseVideo_3">Læs mere</button>
+					</div>
+                </div>
+            }
+
+            <div class="card m-2" style="width: 18rem; ">
+                @*CoronaVideo*@
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/cMThrs1GWqc" allowfullscreen></iframe>
+                <div class="p-4">
+                    <h5 class="card-title">Mims Coronavideo</h5>
+                    Denne video blev produceret
+                    <div class="collapse" id="collapseVideo_4">
+                        <p>
+                            under den første Coronabølge. Størstedelen af alle<br />
+                            lydoptagelser,  er produceret med <br />
+                            mobiltelefoner, hjemme på værelset, <br />
+                            af eleverne selv.
+                        </p>
+                    </div>
+                    <br />
+                    <button class="btn btn-success mt-2" data-toggle="collapse" href="#collapseVideo_4" role="button" aria-expanded="false" aria-controls="collapseVideo_4">Læs mere</button>
+                </div>
+            </div>
+        </div>
+	</div>
+
+</div>
+
+@*
+	<div class="container mt-3">
+		<div class="col">
+			<div class="row">
+				@foreach (var item in Model)
+				{
+					<div class="card m-3" style="width: 18rem;">
+						<iframe class="embed-responsive-item" src="@Html.DisplayNameFor(model => model.VideoLink)" allowfullscreen></iframe>
+						<div class="card-body">
+							<h5 class="card-title">Card title</h5>
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<a href="#" class="btn btn-primary">Go somewhere</a>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+
+		<p>
+			<a asp-action="Create">Create New</a>
+		</p>
+
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						@Html.DisplayNameFor(model => model.Name)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Description)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.VideoLink)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.FileName)
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.Name)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Description)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.VideoLink)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.FileName)
+						</td>
+						<td>
+							<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+							<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+							<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+*@

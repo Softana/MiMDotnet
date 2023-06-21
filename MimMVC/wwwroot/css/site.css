@@ -1,0 +1,274 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+
+:root {
+/*Grobal color*/
+    --clr-gb-shadow: #5a5a5a;
+
+    --clr-gb-primary: #067E0A;
+    --clr-gb-accent: #764981;
+
+/*Gobal font-family*/
+    /*--ff-gb-title: ;*/
+    --ff-bg-pragraf: "Chrimson Text", serif;
+}
+
+.text-gb-primary {
+    color: var(--clr-gb-primary);
+}
+
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+      
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    margin-top: 80px;
+    }
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.bg-cover {
+    height: 250px;
+    width: 100%;
+}
+
+p_stickyPost {
+    padding: 5px;
+}
+
+.container-fluid {
+   padding: 0px;
+}
+
+/*-----------Drag an drop  ///////////////////////////-----------*/
+table.sorting tr:not(.home) {
+    cursor: pointer;
+}
+
+.ui-state-highlight {
+    border: 3px dashed #ccc;
+}
+
+
+
+/*-----------Banner Img -----------*/
+.img-wrapper {
+    
+}
+
+.img-responsive {
+
+    width: 100%;
+    max-height: 24rem;
+}
+
+.textbox-overlay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+
+    margin: 1em;
+}
+
+.card-img-overlay {
+    position: absolute;
+    
+    left: 60%;
+
+    margin: 0 5em 0 0;
+}
+
+.img-box-text {
+    color: whitesmoke;
+    /*font-size: 16px;*/
+    /*background-color: var(--clr-gb-shadow);*/
+
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    max-width: 50rem;
+
+    padding: 1em;
+    border-radius: 5px;
+    margin: 0 0 1em 0;
+}
+
+/*-----------Social Icons -----------*/
+
+
+
+.footer-social-links a {
+    margin: 0 0.5rem 0 0;
+    color: #989898;  
+
+    opacity: .6;
+    -webkit-transition: all 0.27s cubic-bezier(0.300, 0.100, 0.580, 1.000);
+    -moz-transition: all 0.27s cubic-bezier(0.300, 0.100, 0.580, 1.000);
+    -o-transition: all 0.27s cubic-bezier(0.300, 0.100, 0.580, 1.000);
+    /*-ms-transition: all 0.27s cubic-bezier(0.300, 0.100, 0.580, 1.000);*/
+    transition: all 0.27s cubic-bezier(0.300, 0.100, 0.580, 1.000);
+}
+
+
+.footer-social-links a:hover {
+    color: #000000;
+}
+
+
+/*-----------Header images front page -----------*/
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.hr-register {
+    background-size: 8px;
+   
+    border-color: lawngreen;
+   background-color: green;   
+}
+
+
+/*----------- Tabel -----------*/
+th, td {
+    padding-left: 15px;
+    
+}
+
+.post{
+    padding: 20px;
+    background: #f1f1f1
+}
+
+#more{
+    display: none;
+}
+
+
+
+.table th {
+   
+    text-align: left;
+    color: #5a5a5a;
+    font-size: 16px;
+}
+.table td {
+    
+    text-align: left;
+    font-size: 14px;
+}
+
+@media (min-width: 992px) {
+    .navbar-nav.social-icons
+
+{
+    margin-left: auto;
+}
+
+}
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover {
+    color: green; /* Change this to your desired active/hover color */
+}
+a.nav-link:hover {
+    color: green;
+}
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    margin-bottom: 2px;
+}
+
+header {
+    background-color: white;
+}
+
+/* Facebook knap*/
+a {
+    color: #5a5a5a;
+    font-weight: bold;
+}
+
+.footer-social-links a {
+    margin: 0 0.5rem 0 0;
+    color: #989898;
+    opacity: .6;
+    -webkit-transition: all 0.27s cubic-bezier(0.300, 0.100, 0.580, 1.000);
+    -moz-transition: all 0.27s cubic-bezier(0.300, 0.100, 0.580, 1.000);
+    -o-transition: all 0.27s cubic-bezier(0.300, 0.100, 0.580, 1.000);
+    /*-ms-transition: all 0.27s cubic-bezier(0.300, 0.100, 0.580, 1.000);*/
+    transition: all 0.27s cubic-bezier(0.300, 0.100, 0.580, 1.000);
+}
+
+
+    .footer-social-links a:hover {
+        color: #000000;
+    }
+
+
+
+

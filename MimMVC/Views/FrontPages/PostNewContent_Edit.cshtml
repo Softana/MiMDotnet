@@ -1,0 +1,51 @@
+﻿@model MimMVC.Models.FrontPage
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container rounded shadow p-3 bg-white rounde mt-0">
+
+    <h4>Redigere indhold</h4>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="PostNewContent_Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="PostTitle" class="control-label"></label>
+                    <input asp-for="PostTitle" class="form-control" />
+                    <span asp-validation-for="PostTitle" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PostContent" class="control-label"></label>
+                    <textarea asp-for="PostContent" class="form-control"></textarea>
+                    <span asp-validation-for="PostContent" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <img src="@("~/img/post/" + Model.ImageName)" asp-append-version="true" width="250px" height="250px" />
+                </div>
+                <div class="form-group">
+                    <label>Uplaod nyt Billede</label>
+                    <br />
+                    <input asp-for="ImageFile" accept="image/*" />
+                    @*accept - All images type*@
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+                <div>
+                    <a class="btn btn-secondary" asp-action="PostNewContent_Index"><i class="fas fa-backspace"></i>&nbsp;Tilbage til listen</a>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>&nbsp;Gem</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        CKEDITOR.replace("PostContent");
+    </script>
+}

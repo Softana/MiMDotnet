@@ -1,0 +1,50 @@
+﻿@model MimMVC.Models.ApplicationUser
+
+<div class="container rounded shadow p-3 bg-white rounde mt-0">
+    <br />
+    <div class="row">
+        <div class="col-md-2>
+            <img class="" src="@("/img/profileImages/" + Model.ImageName)" />
+            @if (Model.ImageName != null)
+            {
+                <img class=" " style="max-width:15rem" src="@("/img/profileImages/" + Model.ImageName)" />
+            }
+
+
+            @if (Model.ImageName == null)
+            {
+                <img class="mx-auto rounded-circle" src="~/img/layout/noimage.png" alt="..." />
+            }
+        </div>
+
+        <div class="col-md-7">
+            <h4>
+                @Model.FullName
+            </h4>
+            <h4>
+                @Model.Email
+            </h4>
+            <h4>
+                @Model.PhoneNumber
+            </h4>
+        </div>
+    </div>
+
+    @if (Model.TeacherDescription != null)
+    {
+        <h4>Beskrive</h4>
+        <p>@Model.TeacherDescription</p>
+    }
+    else
+    {
+        <h4>Beskrive</h4>
+        <p>@Model.TeacherShotDescription</p>
+    }
+
+
+
+
+
+</div>
+
+
