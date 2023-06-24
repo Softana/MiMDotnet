@@ -24,7 +24,7 @@ namespace MimMVC.Areas.Admin.Controllers
 		}
 
         // GET /admin/roles
-        [Authorize(Roles = "Admin, Kasserer, LærerAdmin, Lærer")]
+        [Authorize(Roles = "Admin, Kasserer, LærerAdmin, Lærer, LærerPaaOrlov")]
         public IActionResult Index() => View(_roleManager.Roles);
 
         // GET /admin/roles/create

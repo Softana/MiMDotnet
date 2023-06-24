@@ -9,252 +9,241 @@
 
 
 
-<div class="p-2 mt-1">
-    <nav class="navbar container-fluid p-3 ">
-
-        <ul class="list-inline ">
-            <li class="list-inline-item text-dark">
-                <a class="text-dark btn btn-outline-secondary" asp-area="admin" asp-action="SortUsers" asp-controller="Users" asp-route-Role="Admin">Admin</a>
-            </li>
-            <li class="list-inline-item text-warning">
-                <a class="text-warning btn btn-outline-warning" asp-area="admin" asp-action="SortUsers" asp-controller="Users" asp-route-Role="Bestyrelsesmedlem"> Bestyrelsesmedlem</a>
-            </li>
-            <li class="list-inline-item text-info">
-                <a class="text-info btn btn-outline-info" asp-area="admin" asp-action="SortUsers" asp-controller="Users" asp-route-Role="LærerAdmin">LærerAdmin</a>
-            </li>
-            <li class="list-inline-item text-primary">
-                <a class="text-primary btn btn-outline-primary" asp-area="admin" asp-action="SortUsers" asp-controller="Users" asp-route-Role="Lærer">Lærer</a>
-            </li>
-            <li class="list-inline-item text-success">
-                <a class="text-success btn btn-outline-success" asp-area="admin" asp-action="SortUsers" asp-controller="Users" asp-route-Role="AktivElev">Aktiv Elev</a>
-            </li>
-            <li class="list-inline-item text-danger">
-                <a class="text-danger btn btn-outline-danger" asp-area="admin" asp-action="SortUsers" asp-controller="Users" asp-route-Role="Elev">Elev</a>
-            </li>
-            <li class="list-inline-item text-secondary">
-                <a class="text-secondary btn btn-outline-secondary" asp-area="admin" asp-action="SortUsers" asp-controller="Users" asp-route-Role="TidligereElev">Tidligere elev</a>
-            </li>
-        </ul>
-
-    </nav>
-    <table class="table table-hover ">
-        <thead class="table-success ">
-            <tr>
-                <th width="5%">
-                    Billede
-                </th>
-                <th width="10%">
-                    Navn
-                </th>
-                <th width="5%">
-                    Alder
-                </th>
-                <th width="10%">
-                    Instrument
-                </th>
-                <th>
-                    Tlf Nr.
-                </th>
-
-                <th width="10%">
-                    E-mail
-                </th>
-                <th>
-                    Lærer
-                </th>
-                <th>
-                    Kommentar
-                </th>
 
 
-                <th>
-                    Status
-                </th>
-                <th>
-                    @if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole) || User.IsInRole(MimMVC.WC.BankRole) || User.IsInRole(MimMVC.WC.Manager))
-                    {
-                        <a class="btn btn-outline-dark w-100 text-bold border-0 " table-hover data-toggle="tooltip"
-                           data-placement="top" title="Opret bruger"
-                           asp-area="Identity" asp-page="/Account/Register">
-                            <i class="fas fa-user-plus"></i>
-                        </a>
-                    }
-                </th>
+<div class="container text-center align-content-center">
 
-
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model)
+    <div class="row justify-content-start mt-1">
+        <div class="col-sm-12 justify-content-center">
+            <hr class="bg-danger" />
+            <h5 class="text-danger font-weight-bold"> Elever, som ikke har fået tildelt en lærer</h5>
+        </div>
+        @foreach (var item in Model)
+        {
+            @if (await UserManager.IsInRoleAsync(item, WC.StudentRole))
             {
-            <tr>
-                <td>
-                    <img class="img-fluid rounded-circle img-responsive" style="width:60px; height:60px" src="@("/img/profileImages/" + item.ImageName)" />
-                </td>
-                @if (item.Role == (MimMVC.WC.AdminTeacherRole))
-                {
-                    <td class=" text-info font-weight-bold">
-                        @item.FullName
-                    </td>
-                }
-                else if (item.Role == (MimMVC.WC.TeacherRole))
-                {
-                    <td class="text-info">
-                        @item.FullName
-                    </td>
-                }
-                else if (item.Role == (MimMVC.WC.AktivStudentRole))
-                {
-                    <td class="text-success font-weight-bold">
-                        @item.FullName
-                    </td>
-                }
-                else if (item.Role == (MimMVC.WC.StudentRole))
-                {
-                    <td class="text-danger font-weight-bold">
-                        @item.FullName
-                    </td>
-                }
-                else if (item.Role == (MimMVC.WC.FormerStudent))
-                {
-                    <td class="text-secondary ">
-                        @item.FullName
-                    </td>
-                }
-
-                else if (item.Role == (MimMVC.WC.BankRole))
-                {
-                    <td class="text-warning font-weight-bold">
-                        @item.FullName
-                    </td>
-                }
-
-                else if (item.Role == (MimMVC.WC.AdminRole))
-                {
-                    <td class="text-dark font-weight-bold">
-                        @item.FullName
-                    </td>
-                }
-                else
-                {
-                    <td class="text-warning font-weight-bold">
-                        @item.FullName
-                    </td>
-                }
-
-                <td>
-                    @item.Age år
-                </td>
-
-                <td>
-                    @if (item.Role == (MimMVC.WC.TeacherRole) || item.Role == (MimMVC.WC.AdminTeacherRole) || User.IsInRole(MimMVC.WC.Manager))
-                    {
-                        @item.Teach
-                    }
-                    else if (item.Role == (MimMVC.WC.StudentRole) || item.Role == (MimMVC.WC.AktivStudentRole) || item.Role == (MimMVC.WC.FormerStudent))
-                    {
-                        @item.Instruction
-                    }
-                </td>
-                <td>
-                    @item.PhoneNumber
-                </td>
-                <td width="10%">
-                    @item.Email
-                </td>
-                <td>
-                    <div class="col justify-content-center">
-                        <div class="row">
-                            @if (item.TaughtBy != null)
-                            {
-                                var teacher = await UserManager.FindByIdAsync(item.TaughtBy);
-                                if (teacher != null)
-                                {
-                                    <img class=" center rounded-circle img-responsive" style="width:40px; height:40px" src="@("/img/profileImages/" + teacher.ImageName)" />
-                                }
-                            }
-                        </div>
-                        <div class="row">
-                            @if (item.TaughtBy != null)
-                            {
-                                var teacher = await UserManager.FindByIdAsync(item.TaughtBy);
-                                if (teacher != null)
-                                {
-                                    @teacher.FirstName;
-                                }
-                            }
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    @item.Comments
-                </td>
-                <td>
-                    @item.Role
-                </td>
-
-                <td>
-                    <div class=" d-flex justify-content-end btn-group" role="group">
-                        <a type="button" class="btn btn-outline-info m-sm-1" data-toggle="tooltip" data-placement="top" title="Detaljer"
-                           asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id" m-1>
-                            <i class="fas fa-info-circle"></i>
-                        </a>
-                        @if (User.IsInRole(MimMVC.WC.AdminRole) || User.IsInRole(MimMVC.WC.AdminTeacherRole))
+                <div class="shadow p-2 mb-3 bg-body-tertiary rounded col-md-6 col-lg-2">
+                    <div class="card h-100  border-danger">
+                        @if (item.ImageName != null)
                         {
-                            <a type="button" class="btn btn-outline-secondary m-sm-1" data-toggle="tooltip" data-placement="top"
-                               title="Redigere" asp-action="Edit" asp-route-userid="@item.Id" m-1>
-                                <i class="fas fa-edit"></i>
+                        <div class="text-center">
+                            <img class="img-fluid" style="max-width: 70%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
+                        </div>
+                        }
+                        @if (item.ImageName == null)
+                        {
+                            <img class="mx-auto" src="~/img/layout/noimage.png" alt="..." />
+                        }
+                        <div>
+                            <a asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id">
+                                <p class="text-danger font-weight-bold">@Html.DisplayFor(modelItem => item.FullName)</p>
                             </a>
-                        }
-
-
-                        @if (User.IsInRole(MimMVC.WC.AdminRole))
-                        {
-                            <form action="Delete" method="POST">
-                                <button type="submit" class="btn btn-outline-danger m-1 mr-3 confirmDeletion" data-toggle="tooltip"
-                                        data-placement="left" title="Slet" asp-action="Delete" asp-route-userid="@item.Id">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </form>
-                        }
-
-                    </div>
-                </td>
-            </tr>
-
-                <!-- Modal -->
-                <div class="modal fade" id="deleteProfileModal" tabindex="-1" role="dialog" aria-labelledby="deleteProfileModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="deleteProfileModalLabel">Slet</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Er du sikker på du ønsker at slette @(item.FullName)!
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annullere</button>
-                                <form action="Delete" method="POST">
-                                    <button type="submit" class="btn btn-danger m-1 mr-3" data-toggle="tooltip" data-placement="left"
-                                            asp-action="Edit" asp-route-userid="@item.Id">
-                                        <i class="fas fa-trash-alt"></i> Slet denne bruger
-                                    </button>
-                                </form>
-                            </div>
                         </div>
+
+                        <p class="card-text mb-1" style="font-size: 11px; font-weight: bold;">Alder: &nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Age) År</a></p>
+
+                        @if (item.InteractWith != null)
+                        {
+                            <p class="card-text mb-1" style="font-size: 11px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.InteractWith)</a></p>
+                        }
+                        @if (item.Instruction != null)
+                        {
+                            <p class="card-text mb-1" style="font-size: 11px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Instruction)</a></p>
+                        }
+                        @if (item.Email != null)
+                        {
+                            <p class="card-text mb-1" style="font-size: 11px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Email)</a></p>
+                        }
+                        @if (item.Teach != null)
+                        {
+                            <p class="card-text mb-1"><i class="fas fa-music" style="font-size: 11px;"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Teach)</a></p>
+                        }
+                        @if (item.PhoneNumber != null)
+                        {
+                            <p class="card-text mb-1"><i class="fas fa-phone-volume" style="font-size: 11px;"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.PhoneNumber)</a></p>
+                        } @if (item.TaughtBy != null)
+                        {
+                            <p class="card-text mb-1"><i class="fas fa-phone-volume" style="font-size: 11px;"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.TaughtBy)</a></p>
+                        }
                     </div>
                 </div>
             }
-        </tbody>
+        }
+    </div>
+    <hr class="bg-danger" />
 
-    </table>
+    <div class="col-sm-12 justify-content-center">
+        <hr class="bg-success" />
+        <h5 class="text-success font-weight-bold"> Elever, som har fået tildelt en lærer</h5>
+    </div>
+
+    <div class="row justify-content-start mt-1">
+        @foreach (var item in Model)
+        {
+            @if (await UserManager.IsInRoleAsync(item, WC.AktivStudentRole))
+            {
+                <div class="shadow p-2 mb-3 bg-body-tertiary rounded col-md-6 col-lg-2 ">
+                    <div class="card h-100  border-success">
+                        @if (item.ImageName != null)
+                        {
+                            <div class="text-center">
+                                <img class="img-fluid" style="max-width: 70%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
+                            </div>
+                        }
+                        @if (item.ImageName == null)
+                        {
+                            <img class="mx-auto" src="~/img/layout/noimage.png" alt="..." />
+                        }
+                        <div>
+                            <a asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id">
+                                <p class="text-success font-weight-bold">@Html.DisplayFor(modelItem => item.FullName)</p>
+                            </a>
+                        </div>
+
+                        <p class="card-text mb-1" style="font-size: 11px; font-weight: bold;">Alder: &nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Age) År</a></p>
+
+                        @if (item.InteractWith != null)
+                        {
+                            <p class="card-text mb-1" style="font-size: 11px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.InteractWith)</a></p>
+                        }
+                        @if (item.Instruction != null)
+                        {
+                            <p class="card-text mb-1" style="font-size: 11px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Instruction)</a></p>
+                        }
+                        @if (item.Email != null)
+                        {
+                            <p class="card-text mb-1" style="font-size: 11px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Email)</a></p>
+                        }
+                        @if (item.Teach != null)
+                        {
+                            <p class="card-text mb-1"><i class="fas fa-music" style="font-size: 11px;"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Teach)</a></p>
+                        }
+                        @if (item.PhoneNumber != null)
+                        {
+                            <p class="card-text mb-1"><i class="fas fa-phone-volume" style="font-size: 11px;"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.PhoneNumber)</a></p>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <hr class="bg-success" />
+    <div class="col-sm-12 justify-content-center">
+        <hr class="bg-warning" />
+        <h5 class="text-warning font-weight-bold"> Lærere og Bestyrelsesmedlemmer</h5>
+    </div>
+
+
+    <div class="row justify-content-start mt-1">
+        @foreach (var item in Model)
+        {
+            @if (item.Role == (MimMVC.WC.AdminRole) || item.Role == (MimMVC.WC.TeacherRole) || item.Role == (MimMVC.WC.TeacherOnBreak) || item.Role == (MimMVC.WC.AdminTeacherRole) || item.Role == (MimMVC.WC.BankRole) || item.Role == (MimMVC.WC.Manager) || item.Role == (MimMVC.WC.Chairman))
+            {
+                <div class="shadow p-2 mb-3 bg-body-tertiary rounded col-md-6 col-lg-2 ">
+                    <div class="card h-100  border-success bg-warning">
+                        @if (item.ImageName != null)
+                        {
+                            <div class="text-center">
+                                <img class="img-fluid" style="max-width: 100%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
+                            </div>
+                        }
+                        @if (item.ImageName == null)
+                        {
+                            <img class="mx-auto" src="~/img/layout/noimage.png" alt="..." />
+                        }
+                        <div>
+                            <a asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id">
+                                <p class="text-success font-weight-bold">@Html.DisplayFor(modelItem => item.FullName)</p>
+                            </a>
+                        </div>
+
+                        <p style="font-size: 11px; font-weight: bold;">Alder: &nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Age) År</a></p>
+
+                        @if (item.InteractWith != null)
+                        {
+                            <p style="font-size: 11px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.InteractWith)</a></p>
+                        }
+                        @if (item.Instruction != null)
+                        {
+                            <p style="font-size: 11px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Instruction)</a></p>
+                        }
+                        @if (item.Email != null)
+                        {
+                            <p style="font-size: 11px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Email)</a></p>
+                        }
+                        @if (item.Teach != null)
+                        {
+                            <p><i class="fas fa-music" style="font-size: 11px;"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Teach)</a></p>
+                        }
+                        @if (item.PhoneNumber != null)
+                        {
+                            <p><i class="fas fa-phone-volume" style="font-size: 11px;"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.PhoneNumber)</a></p>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <hr class="bg-warning" />
+    <div class="col-sm-12 justify-content-center">
+        <hr class="bg-secondary" />
+        <h5 class="text-secondary font-weight-bold"> Tidligere elever</h5>
+    </div>
+
+
+    <div class="row justify-content-start mt-1">
+        @foreach (var item in Model)
+        {
+            @if (await UserManager.IsInRoleAsync(item, WC.FormerStudent))
+            {
+                <div class="shadow p-2 mb-3 bg-body-tertiary rounded col-md-6 col-lg-2 ">
+                    <div class="card h-100  border-secondary">
+                        @if (item.ImageName != null)
+                        {
+                            <div class="text-center">
+                                <img class="img-fluid" style="max-width: 70%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
+                            </div>
+                        }
+                        @if (item.ImageName == null)
+                        {
+                            <img class="mx-auto" src="~/img/layout/noimage.png" alt="..." />
+                        }
+                        <div>
+                            <a asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id">
+                                <p class="text-secondary font-weight-bold">@Html.DisplayFor(modelItem => item.FullName)</p>
+                            </a>
+                        </div>
+
+                        <p class="card-text mb-1" style="font-size: 11px; font-weight: bold;">Alder: &nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Age) År</a></p>
+
+                        @if (item.InteractWith != null)
+                        {
+                            <p class="card-text mb-1" style="font-size: 11px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.InteractWith)</a></p>
+                        }
+                        @if (item.Instruction != null)
+                        {
+                            <p class="card-text mb-1" style="font-size: 11px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Instruction)</a></p>
+                        }
+                        @if (item.Email != null)
+                        {
+                            <p class="card-text mb-1" style="font-size: 11px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Email)</a></p>
+                        }
+                        @if (item.Teach != null)
+                        {
+                            <p class="card-text mb-1"><i class="fas fa-music" style="font-size: 11px;"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Teach)</a></p>
+                        }
+                        @if (item.PhoneNumber != null)
+                        {
+                            <p class="card-text mb-1"><i class="fas fa-phone-volume" style="font-size: 11px;"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.PhoneNumber)</a></p>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <hr class="bg-secondary" />
 </div>
-  
+
 
 @section Scripts {
 

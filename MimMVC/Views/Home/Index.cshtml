@@ -5,12 +5,8 @@
 }
 
 <div class="container-fluid">
-
-    <div id="carouselExampleIndicators" class="carousel slide carousel-fade " data-ride="carousel" data-interval="10000">
-        
-        @*<partial name="_UserInfoLayoutPartial" model="@ApplicationUser"/>*@
-
-        <div class="carousel-inner ">
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel" data-interval="10000">
+        <div class="carousel-inner">
             @foreach (var banner in Model)
             {
                 @if (banner.FirstBanner)
@@ -41,16 +37,16 @@
                             <img class="img-responsive" src="@("~/img/layout/banner/" + banner.ImageName)" asp-append-version="true" />
                             @if (banner.BannerContent != null)
                             {
-                        <div class="textbox-overlay">
-                            <div class="img-box-text">@Html.Raw(banner.BannerContent)</div>
+                                <div class="textbox-overlay">
+                                    <div class="img-box-text">@Html.Raw(banner.BannerContent)</div>
 
-                            @if (banner.BannerButtonLink != null)
-                            {
-                                <div class="text-center">
-                                    <a href="google.com" class="btn btn-info btn-lg table-hover" role="button" aria-disabled="true" target="_blank">@(banner.BannerButtonName)</a>
+                                    @if (banner.BannerButtonLink != null)
+                                    {
+                                        <div class="text-center">
+                                            <a href="google.com" class="btn btn-info btn-lg table-hover" role="button" aria-disabled="true" target="_blank">@(banner.BannerButtonName)</a>
+                                        </div>
+                                    }
                                 </div>
-                            }
-                        </div>
                             }
                         </div>
                     </div>
@@ -70,8 +66,8 @@
 </div>
 
 <br />
-<div class="container" >
-    
+
+<div class="container">
     @foreach (var post in Model.Reverse())
     {
         @if (post.PostTitle != null && post.ImageName != null)
@@ -92,16 +88,12 @@
         }
         else if (post.PostTitle != null && post.ImageName == null)
         {
-
             <div class="row featurette rounded shadow p-3 rounde mb-2" style="background-color: #fafafa;">
                 <div class="col-md-12">
                     <h2 class="featurette-heading">@Html.Raw(post.PostTitle)</h2>
                     <p class="lead">@Html.DisplayFor(modelItem => post.PostContent)</p>
-
                 </div>
-
             </div>
         }
     }
-
 </div>

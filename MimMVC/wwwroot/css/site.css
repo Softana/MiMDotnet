@@ -178,17 +178,40 @@ table.sorting tr:not(.home) {
     user-select: none;
 }
 
-@media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-        font-size: 3.5rem;
+@media (max-width: 767px) {
+    .carousel-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+    }
+
+        .carousel-item .textbox-overlay {
+            text-align: center;
+            bottom: initial;
+            right: initial;
+            margin: 1em;
+        }
+
+    .img-responsive {
+        max-height: none;
     }
 }
 
+
+
+
+
+
+
+
+
+
 .hr-register {
     background-size: 8px;
-   
     border-color: lawngreen;
-   background-color: green;   
+    background-color: green;
 }
 
 

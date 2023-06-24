@@ -4,128 +4,116 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@{bool CheckTeacherRole = true;
-    bool CheckBankRole = true;   
-
-}
-
-<div class="container mt-3 shadow p-3 bg-white">
-	
-	<div class="text-center">
-		<h4 class="mt-3 text-secondary">Musik I Mallings Musikundervisere</h4>
-	</div>
-
-	<div class="row justify-content-center bg-white p-0">
-		@foreach (var item in Model)
-		{
-
-			@if (await UserManager.IsInRoleAsync(item, WC.TeacherRole) || await UserManager.IsInRoleAsync(item, WC.AdminTeacherRole))
-			{
-				<div class="col-lg-3">
-                    <div class="team-member p-3  mt-3 h-100" >
+<div class="container text-center align-content-center">
+    <div class="container">
+        <p class="text-secondary" style="font-size: 1.5rem; font-weight: bold;"> Musikunderviserne</p>
+    </div>
+    <div class="row justify-content-center mt-1">
+        @foreach (var item in Model)
+        {
+            @if (await UserManager.IsInRoleAsync(item, WC.TeacherRole) || await UserManager.IsInRoleAsync(item, WC.AdminTeacherRole))
+            {
+                <div class="shadow p-3 mb-5 bg-body-tertiary rounded col-sm-12 col-md-6 col-lg-3 ">
+                    <div class="card bg-warning h-100 ">
                         @if (item.ImageName != null)
                         {
-                            <img class="mx-auto" src="@("/img/profileImages/" + item.ImageName)" />
-
+                            <img class="card-img-top" alt="" src="@("/img/profileImages/" + item.ImageName)" />
                         }
-
                         @if (item.ImageName == null)
                         {
                             <img class="mx-auto" src="~/img/layout/noimage.png" alt="..." />
                         }
-
-                        <a asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id"><h5 class="text-success" style="padding-bottom: 0.5rem">@Html.DisplayFor(modelItem => item.FullName)</h5></a>
-
-                        @if (item.Email != null)
-                        {
-                            <p class="card-text mb-auto" style="font-size:13px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Email)</a></p>
-                        }
-
-                        @if (item.Teach != null)
-                        {
-                            <p class="card-text mb-auto"><i class="fas fa-music"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Teach)</a></p>
-                        }
-
-                        @if (item.PhoneNumber != null)
-                        {
-                            <p class="card-text mb-auto"><i class="fas fa-phone-volume"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.PhoneNumber)</a></p>
-                        }
-                        @if (await UserManager.IsInRoleAsync(item, WC.Manager))
-                        {
-                            <p class="card-text mb-auto"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;<a>Daglig leder</a></p>
-                        }
-						<br />
-                        <a class="pb-0 mb-0" asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id"><p class="text-secondary"><u>Mere..</u></p></a>
-
+                        <div class="card-body">
+                            <a asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id" class="text-decoration-none">
+                                <p class="card-title text-success font-weight-bold" style="padding-bottom: 0.5rem; font-size: 1rem;">@Html.DisplayFor(modelItem => item.FullName)</p>
+                            </a>
+                            @if (item.Email != null)
+                            {
+                                <p class="card-text mb-2 font-weight-bold" style="font-size: 13px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Email)</a></p>
+                            }
+                            @if (item.Teach != null)
+                            {
+                                <p class="card-text mb-2 font-weight-bold"><i class="fas fa-music"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Teach)</a></p>
+                            }
+                            @if (item.PhoneNumber != null)
+                            {
+                                <p class="card-text mb-2 font-weight-bold"><i class="fas fa-phone-volume"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.PhoneNumber)</a></p>
+                            }
+                            @if (await UserManager.IsInRoleAsync(item, WC.Manager))
+                            {
+                                <p class="card-text mb-2 font-weight-bold"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;<a>Daglig leder</a></p>
+                            }
+                            <a class="pb-0 mb-0 text-secondary" asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id">
+                                <p class="card-link"><u>Mere..</u></p>
+                            </a>
+                        </div>
                     </div>
-				</div>
-			}
-		}
-	</div>
-
-	<div class="text-center">
-		<h4 class="mt-4 text-secondary">Musik I Mallings bestyrelse</h4>
-	</div>
-
-	<div class="row justify-content-center mt-2">
-		@foreach (var item in Model)
-		{
-
-			@if (await UserManager.IsInRoleAsync(item, WC.Chairman) || await UserManager.IsInRoleAsync(item, WC.Manager) || await UserManager.IsInRoleAsync(item, WC.BankRole) || await UserManager.IsInRoleAsync(item, WC.AdminRole) && !item.FullName.Contains("Admin"))
-			{
-				<div class="col-lg-3">
-					<div class="team-member p-3 mt-3 h-100" >
-						@if (item.ImageName != null)
-						{
-							<img class="mx-auto" src="@("/img/profileImages/" + item.ImageName)" />
-						}
-
-						@if (item.ImageName == null)
-						{
-							<img class="mx-auto" src="~/img/layout/noimage.png" alt="..." />
-						}
-
-						<a asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id"><h5 class="text-success" style="padding-bottom: 0.5rem">@Html.DisplayFor(modelItem => item.FullName)</h5></a>
-						@if (item.Email is not null)
-						{
-							<p class="card-text mb-auto center" style="font-size:13px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Email)</a></p>
-						}
-						@if (item.PhoneNumber is not null)
-						{
-							<p class="card-text mb-auto"><i class="fas fa-phone-volume"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.PhoneNumber)</a></p>
-						}
+                </div>
+            }
+        }
+    </div>
 
 
-						@if (await UserManager.IsInRoleAsync(item, WC.BankRole))
-						{
-							<p class="card-text mb-auto"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;<a>@WC.BankRole</a></p>
+    <div class="container mt-3">
+        <p class="text-secondary" style="font-size: 1.5rem; font-weight: bold;"> Bestyrelsen</p>
+    </div>
+    <div class="row justify-content-center mt-1">
 
-						}
-						else if (await UserManager.IsInRoleAsync(item, WC.Manager))
-						{
-							<p class="card-text mb-auto"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;<a>Daglig leder</a></p>
-						}
-						else if (await UserManager.IsInRoleAsync(item, WC.AdminRole))
-						{
-							<p class="card-text mb-auto"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;<a>Web Administrator</a></p>
-						}
-						else if (await UserManager.IsInRoleAsync(item, WC.Chairman))
-						{
-							<p class="card-text mb-auto"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;<a>Bestyrelsesformand</a></p>
-						}
+        @foreach (var item in Model)
+        {
+            @if (await UserManager.IsInRoleAsync(item, WC.Chairman) || await UserManager.IsInRoleAsync(item, WC.Manager) || await UserManager.IsInRoleAsync(item, WC.BankRole) ||
+       await UserManager.IsInRoleAsync(item, WC.AdminRole) && !item.FullName.Contains("Admin"))
+            {
+                <div class="shadow p-3 mb-5 bg-body-tertiary rounded col-sm-12 col-md-6 col-lg-3 ">
+                    <div class="card bg-warning h-100 ">
+                        @if (item.ImageName != null)
+                        {
+                            <img class="card-img-top" alt="" src="@("/img/profileImages/" + item.ImageName)" />
+                        }
+                        @if (item.ImageName == null)
+                        {
+                            <img class="mx-auto" src="~/img/layout/noimage.png" alt="..." />
+                        }
+                        <div class="card-body">
+                            <a asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id">
+                                <p class="text-success font-weight-bold" style="padding-bottom: 0.5rem;">@Html.DisplayFor(modelItem => item.FullName)</p>
+                            </a>
+                            @if (item.Email is not null)
+                            {
+                                <p class="card-text mb-auto  font-weight-bold" style="font-size: 13px;"><i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.Email)</a></p>
+                            }
+                            @if (item.PhoneNumber is not null)
+                            {
+                                <p class="card-text mb-auto  font-weight-bold"><i class="fas fa-phone-volume"></i>&nbsp;&nbsp;<a>@Html.DisplayFor(modelItem => item.PhoneNumber)</a></p>
+                            }
+                            @if (await UserManager.IsInRoleAsync(item, WC.BankRole))
+                            {
+                                <p class="card-text mb-auto  font-weight-bold"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;<a>@WC.BankRole</a></p>
+                            }
+                            else if (await UserManager.IsInRoleAsync(item, WC.Manager))
+                            {
+                                <p class="card-text mb-auto  font-weight-bold"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;<a>Daglig leder</a></p>
+                            }
+                            else if (await UserManager.IsInRoleAsync(item, WC.AdminRole))
+                            {
+                                <p class="card-text mb-auto  font-weight-bold"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;<a>Web Administrator</a></p>
+                            }
+                            else if (await UserManager.IsInRoleAsync(item, WC.Chairman))
+                            {
+                                <p class="card-text mb-auto  font-weight-bold"><i class="fas fa-id-card-alt"></i>&nbsp;&nbsp;<a>Bestyrelsesformand</a></p>
+                            }
+                            <br />
+                            <a class="pb-0 mb-0  font-weight-bold" asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id"><p class="text-secondary"><u>Mere..</u></p></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<br />
 
-					</div>
-				</div>
-			}
-		}
-	</div>
-	
-
-		<br />
-		<!--Google map-->
-		<div id="map-container-google-1" class="z-depth-1-half map rounded p-3 mb-3" >
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2228.8204463550333!2d10.196007851630151!3d56.03909767724681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464c43ce2ad40177%3A0x4c7c636e86b0fa57!2sMalling%20Skole%20og%20SFO!5e0!3m2!1sda!2sdk!4v1631520749735!5m2!1sda!2sdk" frameborder="0"
-					style="border:0" allowfullscreen></iframe>
-		</div>
-		<!--Google Maps-->
-	</div>
+<div id="map-container-google-1" class="container map rounded justify-content-center p-3 mb-3">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2228.8204463550333!2d10.196007851630151!3d56.03909767724681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464c43ce2ad40177%3A0x4c7c636e86b0fa57!2sMalling%20Skole%20og%20SFO!5e0!3m2!1sda!2sdk!4v1631520749735!5m2!1sda!2sdk" frameborder="0"
+            style="border:0" allowfullscreen></iframe>
+</div>

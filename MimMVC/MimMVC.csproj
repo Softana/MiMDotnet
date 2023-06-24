@@ -33,4 +33,11 @@
     <None Include="wwwroot\Templates\BekreftEmail_Ikke_Bruge_Den_Her.html" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\img\layout\noimage.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

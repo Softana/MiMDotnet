@@ -9,6 +9,7 @@ namespace MimMVC
 	{
 		public const string AdminRole = "Admin";
         public const string TeacherRole = "Lærer";
+        public const string TeacherOnBreak = "Orlov";
         public const string AdminTeacherRole = "LærerAdmin";
         public const string StudentRole = "Elev";
         public const string AktivStudentRole = "AktivElev";
