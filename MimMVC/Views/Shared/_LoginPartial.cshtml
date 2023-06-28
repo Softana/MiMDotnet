@@ -9,23 +9,23 @@
     @if (SignInManager.IsSignedIn(User))
     {
         
-        <a class="nav-link text-dark" data-toggle="tooltip" data-placement="top" title="Gå til min profil side" asp-area="identity" asp-page="/Account/Manage/businesscard" asp-route-id="@user.Id">
+        <a class="nav-link text-dark" asp-area="identity" asp-page="/Account/Manage/businesscard" asp-route-id="@user.Id">
             Hej @if (user.FirstName.Any())
             {@user.FirstName}&nbsp;<i class="fas fa-user"></i>
         </a>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-secondary btn-sm text-light" data-toggle="tooltip" data-placement="top" title="Tryk for at log ud"><i class="fas fa-sign-out-alt"></i>&nbsp;Log ud</button>
+                <button type="submit" class="nav-link btn btn-secondary btn-sm text-light font-weight-bold"><i class="fas fa-sign-out-alt"></i>&nbsp;Log ud</button>
             </form>
         </li>
     }
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-success" data-toggle="tooltip" data-placement="top" title="Tryk for at tilmelde en ny bruger eller elev" asp-area="Identity" asp-page="/Account/Register">Indmeld</a>
+            <a class="nav-link btn-sm btn-success font-weight-bold" style="color:white;"  asp-area="Identity" asp-page="/Account/Register">Indmeld</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" data-toggle="tooltip" data-placement="top" title="Tryk for at log in med din bruger" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            <a class="nav-link text-dark font-weight-bold"  asp-area="Identity" asp-page="/Account/Login">Login</a>
         </li>
     }
 </ul>
