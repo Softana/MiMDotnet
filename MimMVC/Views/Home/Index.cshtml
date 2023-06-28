@@ -16,8 +16,8 @@
                             <img class="img-responsive" src="@("~/img/layout/banner/" + banner.ImageName)" asp-append-version="true" />
                             @if (banner.BannerContent != null)
                             {
-                                <div class="textbox-overlay mt-sm-5">
-                                    <div class="img-box-text">@Html.Raw(banner.BannerContent)</div>
+                                <div class="textbox-overlay ">
+                                    <div class="img-box-text mt-sm-4">@Html.Raw(banner.BannerContent)</div>
 
                                     @if (banner.BannerButtonLink != null)
                                     {
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 }
-                if (banner.PostTitle == null)
+                if (banner.PostTitle == null && !banner.FirstBanner)
                 {
                     <div class="carousel-item">
                         <div class="img-wrapper">
@@ -38,12 +38,12 @@
                             @if (banner.BannerContent != null)
                             {
                                 <div class="textbox-overlay">
-                                    <div class="img-box-text">@Html.Raw(banner.BannerContent)</div>
+                                    <div class="img-box-text mt-4">@Html.Raw(banner.BannerContent)</div>
 
                                     @if (banner.BannerButtonLink != null)
                                     {
                                         <div class="text-center">
-                                            <a href="google.com" class="btn btn-info btn-lg table-hover" role="button" aria-disabled="true" target="_blank">@(banner.BannerButtonName)</a>
+                                            <a href="@(banner.BannerButtonLink)" class="btn btn-success btn-lg table-hover" role="button" aria-disabled="true" target="_blank">@(banner.BannerButtonName)</a>
                                         </div>
                                     }
                                 </div>
