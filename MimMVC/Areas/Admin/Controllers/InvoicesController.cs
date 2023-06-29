@@ -36,14 +36,14 @@ namespace MimMVC.Areas.Admin.Controllers
         }
 
         // GET /admin/invoices
-        [Authorize(Roles = "Admin, LærerAdmin, Kasserer, Lærer, Leder")]
+        [Authorize(Roles = "Admin, LærerAdmin, Kasserer, Lærer, Leder, Orlov")]
         public async Task<IActionResult> Index()
         {
             return View(await context.Invoices.OrderByDescending(x => x.Id).Include(x => x.UserCreate).ToListAsync());
         }
 
         //Get/admin/Invoices/create
-        [Authorize(Roles = "Admin, LærerAdmin, Kasserer, Lærer, Leder")]
+        [Authorize(Roles = "Admin, LærerAdmin, Kasserer, Lærer, Leder, Orlov")]
         public IActionResult Create()
         {
             ViewBag.InvoiceId = new SelectList(context.Categories.OrderBy(x => x.Sorting), "Id", "Name");
@@ -52,7 +52,7 @@ namespace MimMVC.Areas.Admin.Controllers
 
         // POST /admin/Invoices/create
         [HttpPost]
-        [Authorize(Roles = "Admin, LærerAdmin, Kasserer, Lærer, Leder")]
+        [Authorize(Roles = "Admin, LærerAdmin, Kasserer, Lærer, Leder, Orlov")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Invoice invoice)
         {
@@ -104,7 +104,7 @@ namespace MimMVC.Areas.Admin.Controllers
         }
 
         // GET /admin/invoices/details/5
-        [Authorize(Roles = "Admin, LærerAdmin, Kasserer, Lærer, Leder")]
+        [Authorize(Roles = "Admin, LærerAdmin, Kasserer, Lærer, Leder, Orlov")]
         public async Task<IActionResult> Details(int id)
         {
             Invoice invoice = await context.Invoices.FirstOrDefaultAsync(x => x.Id == id);
@@ -116,7 +116,7 @@ namespace MimMVC.Areas.Admin.Controllers
         }
 
         // GET /admin/Invoices/edit/5
-        [Authorize(Roles = "Admin, LærerAdmin, Kasserer, Lærer, Leder")]
+        [Authorize(Roles = "Admin, LærerAdmin, Kasserer, Lærer, Leder, Orlov")]
         public async Task<IActionResult> Edit(int id)
         {
             Invoice product = await context.Invoices.FindAsync(id);
@@ -132,7 +132,7 @@ namespace MimMVC.Areas.Admin.Controllers
 
         // POST /admin/invoices/edit
         [HttpPost]
-        [Authorize(Roles = "Admin, LærerAdmin, Kasserer, Lærer, Leder")]
+        [Authorize(Roles = "Admin, LærerAdmin, Kasserer, Lærer, Leder, Orlov")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Invoice invoice)
         {

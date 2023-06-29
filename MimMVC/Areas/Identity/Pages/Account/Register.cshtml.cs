@@ -237,6 +237,10 @@ namespace MimMVC.Areas.Identity.Pages.Account
                     var html = System.IO.File.ReadAllText(pathLon);
                     html = html.Replace("{{BrugernavnLon}}", user.FullName);
                     html = html.Replace("{{InstruLon}}", user.Instruction);
+                    html = html.Replace("{{StudentAge}}", user.Age.ToString());
+                    html = html.Replace("{{Experience}}", user.NoYPlayed);
+                    html = html.Replace("{{StutentEmail}}", user.Email);
+                    html = html.Replace("{{StutentPhone}}", user.PhoneNumber);
                     await _emailSender.SendEmailOnlyBody("info@musikimalling.dk", "MiM Ny indmeldelse", html);
 
                     var pathLonBekreft = _hostEnvironment.WebRootPath + "/Templates/BekreftEmail.html";

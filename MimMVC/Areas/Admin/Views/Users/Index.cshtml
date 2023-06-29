@@ -27,12 +27,15 @@
                         @if (item.ImageName != null)
                         {
                         <div class="text-center">
-                            <img class="img-fluid" style="max-width: 70%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
+                            <img class="img-fluid" style="width: 100%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
                         </div>
                         }
                         @if (item.ImageName == null)
                         {
-                            <img class="mx-auto" src="~/img/layout/noimage.png" alt="..." />
+                    <div class="text-center">
+                        <img class="img-fluid" style="max-width: 70%; height: auto;" src="~/img/layout/noimage.png" alt="..." />
+                    </div>
+                            
                         }
                         <div>
                             <a asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id">
@@ -87,12 +90,14 @@
                 @if (item.ImageName != null)
                 {
                     <div class="text-center">
-                        <img class="img-fluid" style="max-width: 70%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
+                        <img class="img-fluid" style="width: 100%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
                     </div>
                 }
                 @if (item.ImageName == null)
                 {
-                    <img class="mx-auto" src="~/img/layout/noimage.png" alt="..." />
+            <div class="text-center">
+                <img class="img-fluid" style="max-width: 70%; height: auto;" src="~/img/layout/noimage.png" alt="..." />
+            </div>
                 }
                 <div>
                     <a asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id">
@@ -144,12 +149,14 @@
                 @if (item.ImageName != null)
                 {
                     <div class="text-center">
-                        <img class="img-fluid" style="max-width: 100%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
+                        <img class="img-fluid" style="width: 100%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
                     </div>
                 }
                 @if (item.ImageName == null)
                 {
-                    <img class="mx-auto" src="~/img/layout/noimage.png" alt="..." />
+                    <div class="text-center">
+                        <img class="img-fluid" style="max-width: 70%; height: auto;" src="~/img/layout/noimage.png" alt="..." />
+                    </div>
                 }
                 <div>
                     <a asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id">
@@ -201,12 +208,14 @@
                 @if (item.ImageName != null)
                 {
                     <div class="text-center">
-                        <img class="img-fluid" style="max-width: 70%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
+                        <img class="img-fluid" style="width: 100%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
                     </div>
                 }
                 @if (item.ImageName == null)
                 {
-                    <img class="mx-auto" src="~/img/layout/noimage.png" alt="..." />
+                    <div class="text-center">
+                        <img class="img-fluid" style="max-width: 70%; height: auto;" src="~/img/layout/noimage.png" alt="..." />
+                    </div>
                 }
                 <div>
                     <a asp-area="admin" asp-controller="users" asp-action="details" asp-route-id="@item.Id">

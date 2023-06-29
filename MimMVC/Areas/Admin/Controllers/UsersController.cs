@@ -32,7 +32,7 @@ namespace MimMVC.Areas.Admin.Controllers
         }
 
         //// GET /admin/Users/Index
-        [Authorize(Roles = "Admin, Lærer, LærerAdmin, Kasserer, Leder")]
+        [Authorize(Roles = "Admin, Lærer, LærerAdmin, Kasserer, Leder, Orlov")]
         public IActionResult Index()
         {           
 
@@ -57,7 +57,7 @@ namespace MimMVC.Areas.Admin.Controllers
             return View(userList);
         }
 
-        [Authorize(Roles = "Admin, Lærer, LærerAdmin, Kasserer, Leder")]
+        [Authorize(Roles = "Admin, Lærer, LærerAdmin, Kasserer, Leder, Orlov")]
         public IActionResult SortUsers(string Role) {
 
             var userList = _content.ApplicationUser.ToList();
@@ -94,7 +94,7 @@ namespace MimMVC.Areas.Admin.Controllers
 
 
         //// GET /admin/Users/Edit/5
-        [Authorize(Roles = "Admin, LærerAdmin, Leder")]
+        [Authorize(Roles = "Admin, LærerAdmin, Leder, Orlov")]
         public IActionResult Edit(string userId)
         {
             var objFromDb = _content.ApplicationUser.FirstOrDefault(u => u.Id == userId);
@@ -117,7 +117,7 @@ namespace MimMVC.Areas.Admin.Controllers
             return View(objFromDb);
         }
 
-        [Authorize(Roles = "Admin, LærerAdmin, Leder")]
+        [Authorize(Roles = "Admin, LærerAdmin, Leder, Orlov")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(ApplicationUser user)

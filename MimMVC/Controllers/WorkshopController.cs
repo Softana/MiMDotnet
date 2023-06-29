@@ -24,7 +24,7 @@ namespace MimMVC.Controllers
         }
 
 
-  
+
 
         public IActionResult Index()
         {
@@ -85,8 +85,6 @@ namespace MimMVC.Controllers
             {
                 string uploadsDir = Path.Combine(_hostEnvironment.WebRootPath, "img/invitation/");
 
- 
-
                 imageName = work.Entity.Id + "_" + workShop.File.FileName;
                 string filePath = Path.Combine(uploadsDir, imageName);
                 FileStream fs = new FileStream(filePath, FileMode.Create);
@@ -97,8 +95,6 @@ namespace MimMVC.Controllers
             }
 
             workShop.FileName = imageName;
-
-            
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
             return RedirectToAction("Index");
@@ -106,7 +102,6 @@ namespace MimMVC.Controllers
 
         public IActionResult Delete(int id)
         {
-
             var workshop = _context.Workshops.Include(x => x.TilmeldteBrugere).FirstOrDefault(x => x.Id == id);
             var indmeldelser = _context.WorkShopIndmeldelser.Where(x => x.workShop == workshop).ToList();
             _context.WorkShopIndmeldelser.RemoveRange(indmeldelser);
@@ -117,26 +112,26 @@ namespace MimMVC.Controllers
 
         public async Task<IActionResult> Tilmeld(int id)
         {
-            var workshop = _context.Workshops.Include(x => x.TilmeldteBrugere).FirstOrDefault( x => x.Id == id);
+            var workshop = _context.Workshops.Include(x => x.TilmeldteBrugere).FirstOrDefault(x => x.Id == id);
 
             if (workshop is null) return View("Index");
 
             var user = await _userManager.GetUserAsync(User);
 
-            var indmeldelse = new TilmeldDto() { WorkshopId = id};
-           // workshop.TilmeldteBrugere.Add(indmeldelse);    
+            var indmeldelse = new TilmeldDto() { WorkshopId = id };
+            // workshop.TilmeldteBrugere.Add(indmeldelse);    
             return View(indmeldelse);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Tilmeld(TilmeldDto tilmeld )
+        public async Task<IActionResult> Tilmeld(TilmeldDto tilmeld)
         {
             var workshop = _context.Workshops.Include(x => x.TilmeldteBrugere).FirstOrDefault(x => x.Id == tilmeld.WorkshopId);
             var user = await _userManager.GetUserAsync(User);
 
             var tilmeldelse = new WorkShopIndmeldelse() { Gæster = tilmeld.guests, user = user, workShop = workshop };
 
-            if (workshop.TilmeldteBrugere.Where(x => x.user == user).Count() == 0 )
+            if (workshop.TilmeldteBrugere.Where(x => x.user == user).Count() == 0)
             {
                 workshop.TilmeldteBrugere.Add(tilmeldelse);
                 workshop.AntalGæster += tilmeld.guests;
@@ -144,7 +139,6 @@ namespace MimMVC.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            
             return RedirectToAction("Index");
         }
 
@@ -162,7 +156,6 @@ namespace MimMVC.Controllers
                 workshop.AntalGæster -= tilmeldelse.Gæster;
                 await _context.SaveChangesAsync();
             }
-
             return RedirectToAction("Index");
         }
     }
