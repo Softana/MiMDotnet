@@ -236,12 +236,14 @@ namespace MimMVC.Areas.Identity.Pages.Account
                     var pathLon = _hostEnvironment.WebRootPath + "/Templates/IndmeldEmail.html";
                     var html = System.IO.File.ReadAllText(pathLon);
                     html = html.Replace("{{BrugernavnLon}}", user.FullName);
+                    html = html.Replace("{{BrugerFornavn}}", user.FirstName);
                     html = html.Replace("{{InstruLon}}", user.Instruction);
                     html = html.Replace("{{StudentAge}}", user.Age.ToString());
                     html = html.Replace("{{Experience}}", user.NoYPlayed);
                     html = html.Replace("{{StutentEmail}}", user.Email);
                     html = html.Replace("{{StutentPhone}}", user.PhoneNumber);
-                    await _emailSender.SendEmailOnlyBody("info@musikimalling.dk", "MiM Ny indmeldelse", html);
+                    html = html.Replace("{{OnskeLaere}}", user.TaughtBy);
+                    await _emailSender.SendEmailOnlyBody("info@musikimalling.dk", "Musik I Malling", html);
 
                     var pathLonBekreft = _hostEnvironment.WebRootPath + "/Templates/BekreftEmail.html";
                     var htmlBekreft = System.IO.File.ReadAllText(pathLonBekreft);

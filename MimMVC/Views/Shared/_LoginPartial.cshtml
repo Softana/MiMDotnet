@@ -5,7 +5,7 @@
 @{ 
 	var user = await UserManager.GetUserAsync(User);
 }
-<ul class="navbar-nav">
+<ul class="navbar-nav mr-3">
     @if (SignInManager.IsSignedIn(User))
     {
         
@@ -21,11 +21,12 @@
     }
     else
     {
-        <li class="nav-item">
-            <a class="nav-link btn-sm btn-success font-weight-bold" style="color:white;"  asp-area="Identity" asp-page="/Account/Register">Indmeld</a>
+        
+        <li class="nav-item col-sm col-lg justify-content-center mb-1">
+            <a class="nav-link btn-sm  btn-success font-weight-bold text-center" style="color:white;"  asp-area="Identity" asp-page="/Account/Register">Indmeld</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark font-weight-bold"  asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <li class="nav-item col-sm col-lg justify-content-center mb-3">
+            <a class="nav-link btn-sm  btn-secondary font-weight-bold text-center" style="color:white;" asp-area="Identity" asp-page="/Account/Login">Login</a>
         </li>
     }
 </ul>
