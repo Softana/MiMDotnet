@@ -27,7 +27,7 @@
                         @if (item.ImageName != null)
                         {
                         <div class="text-center">
-                            <img class="img-fluid" style="width: 100%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
+                            <img class="img-fluid" style="width: 70%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
                         </div>
                         }
                         @if (item.ImageName == null)
@@ -84,11 +84,11 @@
             @if (await UserManager.IsInRoleAsync(item, WC.AktivStudentRole))
             {
         <div class="shadow p-2 mb-3 bg-body-tertiary rounded col-md-6 col-lg-2">
-            <div class="card h-100  border-success">
+            <div class="card h-100   border-success">
                 @if (item.ImageName != null)
                 {
-                    <div class="text-center">
-                        <img class="img-fluid" style="width: 100%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
+                    <div class="text-center mt-4">
+                        <img class="img-fluid" style="width: 70%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
                     </div>
                 }
                 @if (item.ImageName == null)
@@ -204,11 +204,11 @@
             @if (await UserManager.IsInRoleAsync(item, WC.FormerStudent))
             {
         <div class="shadow p-2 mb-3 bg-body-tertiary rounded col-md-6 col-lg-2">
-            <div class="card h-100  border-secondary">
+            <div class="card h-100   border-secondary">
                 @if (item.ImageName != null)
                 {
-                    <div class="text-center">
-                        <img class="img-fluid" style="width: 100%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
+                    <div class="text-center mt-5">
+                        <img class="img-fluid" style="width: 70%; height: auto;" alt="" src="@("/img/profileImages/" + item.ImageName)" />
                     </div>
                 }
                 @if (item.ImageName == null)

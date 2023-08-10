@@ -14,7 +14,7 @@
             @if (await UserManager.IsInRoleAsync(item, WC.TeacherRole) || await UserManager.IsInRoleAsync(item, WC.AdminTeacherRole))
             {
                 <div class="shadow p-3 mb-5 bg-body-tertiary rounded col-sm-12 col-md-6 col-lg-3 ">
-                    <div class="card bg-warning h-100 ">
+                    <div class="card  h-100 ">
                         @if (item.ImageName != null)
                         {
                             <img class="card-img-top" alt="" src="@("/img/profileImages/" + item.ImageName)" />
@@ -65,7 +65,7 @@
        await UserManager.IsInRoleAsync(item, WC.AdminRole) && !item.FullName.Contains("Admin"))
             {
                 <div class="shadow p-3 mb-5 bg-body-tertiary rounded col-sm-12 col-md-6 col-lg-3 ">
-                    <div class="card bg-warning h-100 ">
+                    <div class="card h-100 ">
                         @if (item.ImageName != null)
                         {
                             <img class="card-img-top" alt="" src="@("/img/profileImages/" + item.ImageName)" />

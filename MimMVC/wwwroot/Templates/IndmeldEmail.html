@@ -1,84 +1,93 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Musik i Malling</title>
+    <style>
+        /* Centrerer indholdet vandret og lodret */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Stil til hovedcontaineren */
+        .main-container {
+            text-align: center;
+            font-size: 25px;
+        }
+
+        /* Stil til det billede */
+        img.logo {
+            width: 250px;
+            margin-bottom: 5px;
+            margin-top: 0px;
+        }
+
+        img.cartoon {
+            width: 230px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        /* Stil til overskrifter */
+        h2, h3 {
+            margin: 0px 0;
+        }
+
+        /* Stil til den musikalske erfaring */
+        .experience {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0px 0;
+            font-size: 30px;
+        }
+
+            .experience h3 {
+                margin-right: 10px;
+            }
+
+        /* Stil til teksten */
+        .text-container {
+            text-align: center;
+            line-height: 1.0; 
+            
+        }
+    </style>
 </head>
 
 <body>
-<table width="70%" align="center">
-    <tr>
-        <td align="center" valign="top">
-            <br>
-            <br>
-            <table width="100%">
-                <tr>
-                    <td align="center">
-                        <div>
-                            <img style="width: auto; margin-bottom: 25px; margin-top: 10px;" src="https://www.musikimalling.dk/img/Template/LOGO.png">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="left" valign="top">
-                        <div style="text-align: left;">
-
-                        </div>
-                        <table width="100%">
-                            <tr>
-                                <td align="center" valign="middle" sstyle="font-weight:bold; margin-top:40px;">
-                                    <div>
-                                        <h2>
-                                            YO! Så Er Der En Ny Tilmelding!
-                                        </h2>
-                                        <img src="https://www.musikimalling.dk/img/Template/cartoonRock.png" style=" width: 300px; height:auto; margin-bottom: 10px;">
-
-                                    </div>
-
-                                </td>
-                            </tr>
-                        </table>
-
-                        <table align="center">
-
-                            <tr>
-                                <td>
-
-                                    <div style="text-align:left;">
-                                        <h3>Att: {{OnskeLaere}}</h3>
-                                        <h4>                                           
-                                            
-                                            {{BrugernavnLon}} på {{StudentAge}},år<br />
-                                            Har Tilmeldt sig {{InstruLon}}-undervisning <br /><br />
-                                            Her er {{BrugerFornavn}}'s oplysninger:
-                                            <br />
-                                            <br />
-                                            Musikalsk erfaring: {{Experience}}<br />
-                                            Email: {{StutentEmail}}<br />
-                                            Telefonnummer: {{StutentPhone}}
-                                        </h4>
-                                        
-                                        <h4>
-                                            Besøg hjemmesiden https://musikimalling.dk/ og inkluder {{BrugerFornavn}}<br />
-                                            på din liste over elever, hvis du er ansvarlig for at undervise i det instrument, som {{BrugerFornavn}} ønsker at lære.
-
-                                        </h4>
-                                        <br />
-                                    </div>
-                                    <br />
-                                </td>
-                            </tr>
-
-
-                        </table>
-
-                    </td>
-                </tr>
-
-            </table>
-            <br>
-            <br>
-        </td>
-    </tr>
-</table>
+    <div class="main-container">
+        <img class="logo" src="https://www.musikimalling.dk/img/Template/LOGO.png">
+        <h3>Ny Tilmelding!</h3>
+        <img class="cartoon" src="https://www.musikimalling.dk/img/Template/cartoonRock.png">
+        <h3>Att: {{OnskeLaere}}</h3>
+        <div class="text-container">
+            <p>
+                {{BrugernavnLon}} på {{StudentAge}},år<br />
+                Har Tilmeldt sig {{InstruLon}}-undervisning
+            </p>
+            <strong>{{BrugerFornavn}}'s oplysninger:</strong>
+            <div class="experience">
+                <h3>Musikalsk erfaring:</h3>
+                <p>{{Experience}}</p>
+            </div>
+            <div class="experience">
+                <h3>Email:</h3>
+                <p>{{StutentEmail}}</p>
+            </div>
+            <div class="experience">
+                <h3>Telefonnummer:</h3>
+                <p>{{StutentPhone}}</p>
+            </div>
+        </div>
+        <p>
+            Besøg hjemmesiden https://musikimalling.dk/ og inkludere {{BrugerFornavn}}<br />
+            på din liste over elever, hvis du er ansvarlig for at undervise
+        </p>
+    </div>
 </body>
 </html>

@@ -46,7 +46,6 @@ namespace MimMVC.Models
         {
             get { return ParentsFirstName + " " + ParentsLastName; }
         }
-
         public string Instruction { get; set; }
         public string OneTeaching { get; set; }
         public string InteractWith { get; set; }        

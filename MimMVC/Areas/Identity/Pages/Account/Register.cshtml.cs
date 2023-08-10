@@ -99,7 +99,6 @@ namespace MimMVC.Areas.Identity.Pages.Account
             public string ParentsFirstName { get; set; }
 
             public string ParentsLastName { get; set; }
-
             public string Instruction { get; set; }
 
             public string OneTeaching { get; set; }
@@ -243,7 +242,7 @@ namespace MimMVC.Areas.Identity.Pages.Account
                     html = html.Replace("{{StutentEmail}}", user.Email);
                     html = html.Replace("{{StutentPhone}}", user.PhoneNumber);
                     html = html.Replace("{{OnskeLaere}}", user.TaughtBy);
-                    await _emailSender.SendEmailOnlyBody("info@musikimalling.dk", "Musik I Malling", html);
+                    await _emailSender.SendEmailOnlyBody("info@musikimalling.dk", "Ny Indmeldelse", html);
 
                     var pathLonBekreft = _hostEnvironment.WebRootPath + "/Templates/BekreftEmail.html";
                     var htmlBekreft = System.IO.File.ReadAllText(pathLonBekreft);

@@ -2,31 +2,34 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@{ 
-	var user = await UserManager.GetUserAsync(User);
+@{
+    var user = await UserManager.GetUserAsync(User);
 }
-<ul class="navbar-nav mr-3">
+<div class="navbar-nav mr-3 justify-content-center">
     @if (SignInManager.IsSignedIn(User))
     {
-        
+
         <a class="nav-link text-dark" asp-area="identity" asp-page="/Account/Manage/businesscard" asp-route-id="@user.Id">
             Hej @if (user.FirstName.Any())
             {@user.FirstName}&nbsp;<i class="fas fa-user"></i>
         </a>
-        <li class="nav-item">
+        <div class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-secondary btn-sm text-light font-weight-bold"><i class="fas fa-sign-out-alt"></i>&nbsp;Log ud</button>
             </form>
-        </li>
+        </div>
     }
     else
     {
-        
-        <li class="nav-item col-sm col-lg justify-content-center mb-1">
-            <a class="nav-link btn-sm  btn-success font-weight-bold text-center" style="color:white;"  asp-area="Identity" asp-page="/Account/Register">Indmeld</a>
-        </li>
-        <li class="nav-item col-sm col-lg justify-content-center mb-3">
-            <a class="nav-link btn-sm  btn-secondary font-weight-bold text-center" style="color:white;" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>
+    <div>
+
+    </div>
+        <div class="nav-item col-sm col-lg justify-content-center mb-1 mr-1">
+            <a class=" row nav-link btn-sm  btn-success font-weight-bold text-center" style="color:white;" asp-area="Identity" asp-page="/Account/Register">Indmeld</a>
+        </div>
+        <div class="nav-item col-sm col-lg justify-content-center mb-3">
+            <a class=" row nav-link btn-sm  btn-secondary font-weight-bold text-center" style="color:white;" asp-area="Identity" asp-page="/Account/Login">Login</a>
+
+        </div>
     }
-</ul>
+</div>
