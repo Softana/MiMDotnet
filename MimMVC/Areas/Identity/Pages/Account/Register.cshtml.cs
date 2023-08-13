@@ -242,7 +242,7 @@ namespace MimMVC.Areas.Identity.Pages.Account
                     html = html.Replace("{{StutentEmail}}", user.Email);
                     html = html.Replace("{{StutentPhone}}", user.PhoneNumber);
                     html = html.Replace("{{OnskeLaere}}", user.TaughtBy);
-                    await _emailSender.SendEmailOnlyBody("info@musikimalling.dk", "Ny Indmeldelse", html);
+                    await _emailSender.SendEmailOnlyBody("info@musikimalling.dk", " Indmeldelse", html);
 
                     var pathLonBekreft = _hostEnvironment.WebRootPath + "/Templates/BekreftEmail.html";
                     var htmlBekreft = System.IO.File.ReadAllText(pathLonBekreft);

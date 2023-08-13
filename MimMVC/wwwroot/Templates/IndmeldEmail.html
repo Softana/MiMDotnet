@@ -1,93 +1,72 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8 initial-scale=1.0" />
     <title>Musik i Malling</title>
     <style>
-        /* Centrerer indholdet vandret og lodret */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .container {
+            width: 100%;
             height: 100vh;
-            margin: 0;
+            background-color: lightgray;
+            background-position: center;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Stil til hovedcontaineren */
-        .main-container {
+        .profile-box {
+            background-color: white;
             text-align: center;
-            font-size: 25px;
+            max-width: auto;
+            height: 100vh;
         }
 
-        /* Stil til det billede */
-        img.logo {
-            width: 250px;
-            margin-bottom: 5px;
+        .profil-billede {
+            width: 100px;
             margin-top: 0px;
         }
 
-        img.cartoon {
-            width: 230px;
-            height: auto;
-            margin-bottom: 10px;
+        .logo {
+            width: 100px;
+            margin-left: 10px;
         }
 
-        /* Stil til overskrifter */
-        h2, h3 {
-            margin: 0px 0;
+        .font {
+            font-weight: normal;
         }
 
-        /* Stil til den musikalske erfaring */
-        .experience {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0px 0;
-            font-size: 30px;
+        body {
+            font-family: "Raleway"
         }
 
-            .experience h3 {
-                margin-right: 10px;
-            }
-
-        /* Stil til teksten */
-        .text-container {
+        .text {
             text-align: center;
-            line-height: 1.0; 
-            
+            max-width: 600px;
         }
     </style>
 </head>
-
 <body>
-    <div class="main-container">
-        <img class="logo" src="https://www.musikimalling.dk/img/Template/LOGO.png">
-        <h3>Ny Tilmelding!</h3>
-        <img class="cartoon" src="https://www.musikimalling.dk/img/Template/cartoonRock.png">
-        <h3>Att: {{OnskeLaere}}</h3>
-        <div class="text-container">
+    <img class="logo" src="https://www.musikimalling.dk/img/Template/LOGO.png" />
+    <div class="container">
+        <div class="profile-box">
+
+            <img src="https://www.musikimalling.dk/img/Template/cartoonRock.png" alt="Profil-billede" class="profil-billede" />
+            <h3 style="color: black">Ny tilmelding!</h3>
             <p>
                 {{BrugernavnLon}} på {{StudentAge}},år<br />
                 Har Tilmeldt sig {{InstruLon}}-undervisning
             </p>
+
             <strong>{{BrugerFornavn}}'s oplysninger:</strong>
-            <div class="experience">
-                <h3>Musikalsk erfaring:</h3>
-                <p>{{Experience}}</p>
-            </div>
-            <div class="experience">
-                <h3>Email:</h3>
-                <p>{{StutentEmail}}</p>
-            </div>
-            <div class="experience">
-                <h3>Telefonnummer:</h3>
-                <p>{{StutentPhone}}</p>
-            </div>
+
+            <h4>Erfaring: <span class="font">{{Experience}}</span></h4>
+            <h4>Email: <span class="font">{{StutentEmail}}</span></h4>
+            <h4>Telefon: <span class="font">{{StutentPhone}}</span></h4>
+            <p>
+                Besøg hjemmesiden https://musikimalling.dk/ og inkludere {{BrugerFornavn}}<br />
+                på din liste over elever, hvis du er ansvarlig for at undervise i det valgte instrument.
+            </p>
         </div>
-        <p>
-            Besøg hjemmesiden https://musikimalling.dk/ og inkludere {{BrugerFornavn}}<br />
-            på din liste over elever, hvis du er ansvarlig for at undervise
-        </p>
     </div>
+
 </body>
 </html>
